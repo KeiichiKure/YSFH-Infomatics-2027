@@ -1,0 +1,174 @@
+.analog-unit {
+  --term-text: 16px;
+  --review-text: 14px;
+}
+
+.analog-unit .revision-label {
+  display: inline-flex;
+  margin-top: 12px;
+  padding: 4px 12px;
+  border: 1px solid #b7d4cb;
+  border-radius: 8px;
+  color: var(--teal-dark);
+  background: #edf5f0;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.analog-unit .section-terms {
+  margin-top: 28px;
+  padding: 20px;
+  border: 1px solid #b9d0ca;
+  border-radius: 14px;
+  background: #f2f7f2;
+}
+
+.analog-unit .section-terms-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 14px;
+}
+
+.analog-unit .section-terms h3 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.analog-unit .term-worksheet {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.analog-unit .section-terms-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.analog-unit .section-terms-list > div {
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: white;
+}
+
+.analog-unit .section-terms-list dt {
+  color: var(--ink);
+  font-size: var(--term-text);
+  font-weight: 800;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.analog-unit .section-terms-list dd {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: var(--term-text);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.analog-unit .review-heading h2 {
+  margin: 12px 0;
+  font-size: 32px;
+  line-height: 1.4;
+}
+
+.analog-unit .review-heading > p,
+.analog-unit .review-hint {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.analog-unit .review-terms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 16px;
+  margin: 20px 0;
+}
+
+.analog-unit .review-term {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.analog-unit .review-section-link {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  min-height: 44px;
+  border-radius: 8px;
+  color: white;
+  background: var(--teal);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.analog-unit .review-section-link:hover {
+  background: var(--teal-dark);
+}
+
+.analog-unit .review-term details {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: white;
+}
+
+.analog-unit .review-term summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 14px;
+  list-style: none;
+  color: var(--ink);
+  font-size: var(--review-text);
+  font-weight: 800;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.analog-unit .review-term summary::-webkit-details-marker { display: none; }
+.analog-unit .review-term summary::after { content: '+'; flex: none; color: var(--teal-dark); font-size: 20px; line-height: 1; }
+.analog-unit .review-term details[open] summary::after { content: '−'; }
+.analog-unit .review-term details[open] { border-color: #80aaa1; }
+.analog-unit .review-term summary:hover { background: #f2f7f2; border-radius: 9px; }
+
+.analog-unit .review-term p {
+  margin: 0;
+  padding: 0 14px 12px;
+  color: var(--muted);
+  font-size: var(--review-text);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.analog-unit .review-related a { color: var(--teal-dark); text-decoration: underline; text-underline-offset: 3px; }
+.analog-unit .review-term :focus-visible { outline: 3px solid var(--teal-dark); outline-offset: 3px; }
+.analog-unit .lesson-nav a[href='#checkpoint'] { font-weight: 800; }
+
+@media (max-width: 760px) {
+  .analog-unit .lesson-nav { padding: 16px 24px; }
+  .analog-unit .lesson-nav ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-top: 12px; }
+  .analog-unit .lesson-nav li { min-width: 0; margin: 0; padding: 0; }
+  .analog-unit .lesson-nav li a { display: flex; align-items: center; min-height: 44px; padding: 8px; border-radius: 8px; background: #edf5f0; white-space: normal; font-size: 14px; }
+  .analog-unit .lesson-nav .nav-note { display: none; }
+  .analog-unit .section-terms { padding: 16px; }
+  .analog-unit .section-terms-list,
+  .analog-unit .review-terms { grid-template-columns: minmax(0, 1fr); }
+  .analog-unit .review-heading h2 { font-size: 26px; }
+}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { SectionTerms } from './ImportantTerms';
 
 type SignalCanvasProps = {
   samples: number;
@@ -143,7 +144,7 @@ export function SignalLab() {
 
   return (
     <section className="learning-section" id="signal">
-      <div className="section-kicker"><span>01</span><p>アナログとデジタル</p></div>
+      <div className="section-kicker"><span>1</span><p>アナログとデジタル</p></div>
       <div className="section-title-row">
         <div><p className="step-label">まず試す · 教科書 p.54</p><h2>波を「区切って」みよう</h2></div>
         <p className="section-question">アナログ波を表示し、次にデジタル値を重ねて違いを確かめよう。</p>
@@ -182,6 +183,7 @@ export function SignalLab() {
         <summary>仕組みを見る：デジタルなら誤差がない？</summary>
         <div><p>区切ることで扱いやすく、多少のノイズが混ざっても元の0・1を判断しやすくなります。一方、区切る間隔や段階が粗いと、元の量との差である<strong>量子化誤差</strong>が生まれます。</p><p className="teacher-note">発展：ノイズが段階の境界を越えると、デジタル化後の値も変化します。「デジタル＝常に正確」ではありません。</p></div>
       </details>
+      <SectionTerms sectionNumber={1} />
     </section>
   );
 }
@@ -203,7 +205,7 @@ export function MediaLab() {
 
   return (
     <section className="learning-section" id="media">
-      <div className="section-kicker"><span>02</span><p>コンピュータのデジタル表現</p></div>
+      <div className="section-kicker"><span>2</span><p>コンピュータのデジタル表現</p></div>
       <div className="section-title-row"><div><p className="step-label">見方を変える · 教科書 p.54</p><h2>0と1は、何でできている？</h2></div><p className="section-question">同じ10110010を、3種類の媒体で表そう。</p></div>
       <div className="lab-panel">
         <div className="segmented-control" aria-label="0と1を表す媒体">
@@ -218,8 +220,8 @@ export function MediaLab() {
         {medium === 'disc' && <div className="disc-legend"><span><i className="land" />ランド：平らな面</span><span><i className="pit" />ピット：へこんだ部分</span><strong>高さが変わる位置を1として読み取る</strong></div>}
         <p className="action-hint">各マスをクリックすると、0と1が切り替わります。</p>
         <div className="concept-strip"><div><b>表し方</b><span>電圧・磁気・光の変化</span></div><i aria-hidden="true">→</i><div><b>意味</b><span>0 または 1</span></div><i aria-hidden="true">→</i><div><b>数の表現</b><span><mark>2進法</mark>・<mark>2進数</mark></span></div></div>
-        <div className="print-callout"><span className="print-number"><small>プリント</small><b>3</b></span><strong>2進法</strong><em>0と1の組合せで数を表す方法</em><span className="print-number"><small>プリント</small><b>4</b></span><strong>2進数</strong><em>2進法で表した数値</em></div>
       </div>
+      <SectionTerms sectionNumber={2} />
     </section>
   );
 }

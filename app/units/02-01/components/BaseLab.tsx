@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
+import { SectionTerms } from './ImportantTerms';
 import understoodMascot from '@/public/mascots/student-understood.png';
 
 type Base = 2 | 10 | 16;
@@ -93,7 +94,7 @@ export function BaseLab() {
 
   return (
     <section className="learning-section" id="bases">
-      <div className="section-kicker"><span>04</span><p>進法の関係 · 教科書 p.55</p></div>
+      <div className="section-kicker"><span>4</span><p>進法の関係 · 教科書 p.55</p></div>
       <div className="section-title-row"><div><p className="step-label">変換する</p><h2>同じ数を、3つの顔で見る</h2></div><p className="section-question">答えだけでなく、変換の道筋を説明できるようになろう。</p></div>
       <div className="converter-panel">
         <div className="converter-input">
@@ -111,7 +112,6 @@ export function BaseLab() {
         {value !== null && <ConversionSteps value={value} base={base} />}
         <div className="nibble-tip expanded-nibbles" style={{ gridTemplateColumns: `repeat(${Math.max(2, binaryGroups.length)}, 1fr)` }}>{value === null ? <><span>----</span><span>----</span></> : binaryGroups.map((group, index) => <span key={`${group}-${index}`}>{group}</span>)}<i>4ビットずつ区切ると、16進数{outputHexWidth}桁になる</i></div>
         <p className="converter-capacity">通常のプリント問題は8ビットで扱います。発展として、ここでは<strong>32ビット符号なし整数（0～4294967295、16進数でFFFFFFFF）</strong>まで試せます。</p>
-        <div className="print-callout"><span className="print-number"><small>プリント</small><b>9・10</b></span><strong>10進法・10進数</strong><em>0～9の10種類</em><span className="print-number"><small>プリント</small><b>11・12</b></span><strong>16進法・16進数</strong><em>0～9とA～Fの16種類</em></div>
       </div>
 
       <div className="worksheet-quiz">
@@ -124,6 +124,7 @@ export function BaseLab() {
         {!allCorrect && <p className="quiz-feedback" aria-live="polite">{checked ? '上の変換ラボに同じ値を入れて、途中式を確かめよう。' : '必要なら上の変換ラボをヒントとして使ってかまいません。'}</p>}
         {allCorrect && <div className="success-celebration" role="status"><span aria-hidden="true">◎</span><div><strong>すばらしい！</strong><p>2つの進数変換、どちらも正解です。</p></div><Image className="celebration-mascot" src={understoodMascot} alt="正解を喜ぶ生徒のマスコット" /></div>}
       </div>
+      <SectionTerms sectionNumber={4} />
     </section>
   );
 }

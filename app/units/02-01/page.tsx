@@ -5,22 +5,19 @@ import { BaseLab } from './components/BaseLab';
 import { BinaryLab } from './components/BinaryLab';
 import { CharacterLab } from './components/CharacterLab';
 import { MediaLab, SignalLab } from './components/SignalLab';
+import type { Metadata } from 'next';
+import { ReviewTerms } from './components/ImportantTerms';
+import { learningSections } from './importantTerms';
+import './revision.css';
 
-const terms = [
-  ['01', '連続的', '切れ目なく変化する'], ['01', '離散的', '飛び飛びの値として表す'],
-  ['02', '2進法', '0と1で数を表す方法'], ['02', '2進数', '2進法で表した数値'],
-  ['03', 'ビット', '情報量の最小単位'], ['03', '8ビット', '8個のビットをまとめる'],
-  ['03', '1バイト', '8ビットのまとまり'], ['03', '1024', '2の10乗'],
-  ['04', '10進法', '0～9を使う表現方法'], ['04', '10進数', '10進法で表した数値'],
-  ['04', '16進法', '0～9とA～Fを使う方法'], ['04', '16進数', '16進法で表した数値'],
-  ['05', '1バイト', '英数字・記号などの基本'], ['05', '2バイト', 'JIS系での漢字などの表現'],
-  ['05', '文字化け', '文字コードの不一致で別表示'], ['05', '機種依存文字', '旧来の環境差に注意'],
-  ['05', '可変長', '文字ごとに使う長さが変わる'],
-];
+export const metadata: Metadata = {
+  title: '02-01 アナログとデジタル｜2027年度改訂版・理数情報ラボ',
+  robots: { index: false, follow: false },
+};
 
 export default function AnalogDigitalUnit() {
   return (
-    <main>
+    <main className="analog-unit">
       <header className="site-header unit-header">
         <Link className="brand" href="/">
           <span className="brand-mark" aria-hidden="true">01</span>
@@ -34,12 +31,8 @@ export default function AnalogDigitalUnit() {
           <Link href="/">← 単元一覧</Link>
           <p>アナログとデジタル<br /><small>教科書 pp.54–56</small></p>
           <ol>
-            <li><a href="#signal">1　波を区切る</a></li>
-            <li><a href="#media">2　0と1の世界</a></li>
-            <li><a href="#bits">3　ビットとバイト</a></li>
-            <li><a href="#bases">4　進数変換</a></li>
-            <li><a href="#characters">5　文字コード</a></li>
-            <li><a href="#checkpoint">6　プリント確認</a></li>
+            {learningSections.map(section => <li key={section.id}><a href={`#${section.id}`}>{section.number}　{section.label}</a></li>)}
+            <li><a href="#checkpoint">✓　まとめ・確認</a></li>
           </ol>
           <div className="nav-note"><b>このサイトは</b><span>入力を送信・保存しません。自分のペースで何度でも試せます。</span></div>
         </nav>
@@ -48,6 +41,7 @@ export default function AnalogDigitalUnit() {
           <section className="lesson-intro">
             <p className="eyebrow">UNIT 02-01 · ANALOG &amp; DIGITAL</p>
             <span className="textbook-page">教科書 pp.54–56</span>
+            <div><span className="revision-label">2027年度 改訂版</span></div>
             <h1>見えない情報を、<br />0と1に変えてみよう。</h1>
             <p>波形、スイッチ、数、文字。ばらばらに見える内容を「0と1で表す」という一本の線でつなぎます。</p>
             <div className="mission-box"><span>今日のミッション</span><strong>デジタル表現の仕組みを、操作と途中式を使って説明できる。</strong></div>
@@ -69,11 +63,10 @@ export default function AnalogDigitalUnit() {
           <CharacterLab />
 
           <section className="learning-section checkpoint" id="checkpoint">
-            <div className="section-kicker"><span>06</span><p>プリント最終確認</p></div>
-            <div className="section-title-row"><div><p className="step-label">言葉にする</p><h2>体験と重要語をつなごう</h2></div><p className="section-question">緑の単元番号を目印に学んだ場所を振り返り、語句をクリックして自分の説明と比べよう。</p></div>
-            <div className="term-grid">
-              {terms.map(([sectionNumber, term, meaning]) => <details key={`${sectionNumber}-${term}`}><summary><span>{sectionNumber}</span><strong>{term}</strong></summary><p>{meaning}</p></details>)}
-            </div>
+            <div className="section-kicker"><span>✓</span><p>まとめ・確認</p></div>
+            <div className="review-heading"><h2>重要語を確認する</h2><p>緑の数字は、このWebページの学習節です。数字から体験に戻れます。</p></div>
+            <p className="review-hint">語句を押すと意味が開きます。もう一度押すと閉じます。</p>
+            <ReviewTerms />
             <div className="final-challenge">
               <p className="step-label">最後の問い</p>
               <h3>「デジタルは0と1で表す」とは、具体的にどういうこと？</h3>
@@ -85,7 +78,7 @@ export default function AnalogDigitalUnit() {
           <footer className="lesson-footer">
             <div><b>理数情報ラボ</b><span>高校 情報Ⅰ · Web教材</span></div>
             <p>図解と操作画面は本教材用に独自作成しています。規格に関する補足はUnicode Standard、JIS・SIの一般的な規格情報に基づきます。</p>
-            <div><Link href="/third-party-notices.txt">第三者ライセンス</Link><Link href="/">単元一覧へ戻る ↑</Link></div>
+            <div><Link href="/third-party-notices.txt">第三者ライセンス</Link><Link href="/">← 単元一覧へ戻る</Link></div>
           </footer>
         </article>
       </div>

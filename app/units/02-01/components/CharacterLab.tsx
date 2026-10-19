@@ -3,6 +3,7 @@
 import Encoding from 'encoding-japanese';
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
+import { SectionTerms } from './ImportantTerms';
 import praiseMascot from '@/public/mascots/teacher-praise.png';
 
 const samples = [
@@ -68,7 +69,7 @@ export function CharacterLab() {
 
   return (
     <section className="learning-section" id="characters">
-      <div className="section-kicker"><span>05</span><p>文字の表現 · 教科書 p.56</p></div>
+      <div className="section-kicker"><span>5</span><p>文字の表現 · 教科書 p.56</p></div>
       <div className="section-title-row"><div><p className="step-label">同じ文字を比べる</p><h2>「あ」は、何バイトになる？</h2></div><p className="section-question">文字そのものと、文字を保存するための番号・バイト列を分けて考えよう。</p></div>
       <div className="character-panel">
         <div className="character-picker" aria-label="比較する文字">
@@ -97,7 +98,6 @@ export function CharacterLab() {
           <div className="byte-blocks" aria-label={`UTF-8で${utf8.length}バイト`}>{utf8.map((byte, index) => <span key={`${byte}-${index}`}><b>{byte.toString(16).toUpperCase().padStart(2, '0')}</b><small>{byte.toString(2).padStart(8, '0')}</small></span>)}</div>
         </div>
         <div className="variable-length"><div><span>A</span><b>1 byte</b></div><div><span>é</span><b>2 bytes</b></div><div><span>あ</span><b>3 bytes</b></div><div><span>😀</span><b>4 bytes</b></div><p><mark>可変長</mark>：文字によって使うバイト数が変わる</p></div>
-        <div className="print-callout print-callout-four"><span className="print-number"><small>プリント</small><b>25</b></span><strong>1バイト</strong><em>英数字や記号など</em><span className="print-number"><small>プリント</small><b>26</b></span><strong>2バイト</strong><em>JIS系での漢字など</em><span className="print-number"><small>プリント</small><b>29</b></span><strong>可変長</strong><em>現在のUTF-8は1～4バイト</em></div>
 
         <div className="symbol-identity" aria-label="円記号とバックスラッシュの区別">
           <div><span>円記号</span><strong>¥</strong><code>U+00A5</code></div>
@@ -158,6 +158,7 @@ export function CharacterLab() {
         <p className={`quiz-feedback ${filenameCorrect ? 'success' : ''}`} aria-live="polite">{filenameChecked ? (filenameCorrect ? '全問正解です。9記号すべて見つかりました！' : '色を手がかりに、間違っている記号だけ選び直せます。') : '先頭の記号はバックスラッシュ（U+005C）です。円記号とは別の文字として考えよう。'}</p>
         {filenameCorrect && <div className="success-celebration symbol-success" role="status"><span aria-hidden="true">◎</span><div><strong>全問正解！ お見事です</strong><p>Windowsで使えない9記号を見分けられました。</p></div><Image className="celebration-mascot" src={praiseMascot} alt="親指を立てて褒める先生のマスコット" /></div>}
       </div>
+      <SectionTerms sectionNumber={5} />
     </section>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { SectionTerms } from './ImportantTerms';
 
 const weights = [128, 64, 32, 16, 8, 4, 2, 1];
 
@@ -18,7 +19,7 @@ export function BinaryLab() {
 
   return (
     <section className="learning-section" id="bits">
-      <div className="section-kicker"><span>03</span><p>情報量とその単位 · 教科書 pp.54–55</p></div>
+      <div className="section-kicker"><span>3</span><p>情報量とその単位 · 教科書 pp.54–55</p></div>
       <div className="section-title-row"><div><p className="step-label">組み合わせる</p><h2>8個のスイッチで数をつくろう</h2></div><p className="section-question">1の箱だけを足すと、なぜ10進数になるのだろう。</p></div>
       <div className="lab-panel bit-lab">
         <div className="bit-calculation-scroll">
@@ -60,11 +61,6 @@ export function BinaryLab() {
           <div><span>16進数では</span><strong>{upperHex}{lowerHex}<small className="base-notation">（16）</small></strong></div>
         </div>
 
-        <div className="print-callout print-callout-four">
-          <span className="print-number"><small>プリント</small><b>5</b></span><strong>ビット</strong><em>情報量の最小単位</em>
-          <span className="print-number"><small>プリント</small><b>6</b></span><strong>8ビット</strong><em>8個まとめる</em>
-          <span className="print-number"><small>プリント</small><b>7</b></span><strong>1バイト</strong><em>8ビットのまとまり</em>
-        </div>
       </div>
 
       <div className="pattern-lab">
@@ -77,6 +73,7 @@ export function BinaryLab() {
         <summary>発展：KBとkBは同じではない？</summary>
         <div className="unit-scale"><div><b>プリントで扱う慣習</b><span>2<sup>10</sup> = <mark>1024</mark>倍ごとに KB・MB・GB</span></div><div><b>現在の明確な表記</b><span>1 kB = 1000 B ／ 1 KiB = 1024 B</span></div><div><b>通信速度</b><span>1 kbps = 1000 bps</span></div></div>
       </details>
+      <SectionTerms sectionNumber={3} />
     </section>
   );
 }
