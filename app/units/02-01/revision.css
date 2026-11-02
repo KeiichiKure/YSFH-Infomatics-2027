@@ -3,6 +3,42 @@
   --review-text: 14px;
 }
 
+.analog-unit .lesson-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  padding: 8px clamp(16px, 2.5vw, 36px);
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.analog-unit .navigation-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--teal);
+  border-radius: 9px;
+  color: var(--teal-dark);
+  background: white;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.analog-unit .navigation-toggle:hover { background: #edf5f0; }
+.analog-unit .navigation-toggle:focus-visible { outline: 3px solid var(--teal-dark); outline-offset: 3px; }
+.analog-unit .lesson-navigation { min-width: 0; }
+.analog-unit .lesson-navigation[hidden] { display: none; }
+.analog-unit .lesson-nav { top: 60px; }
+.analog-unit .learning-section { scroll-margin-top: 76px; }
+.analog-unit .lesson-layout[data-navigation='hidden'] .lesson-shell { grid-template-columns: minmax(0, 1fr); max-width: none; }
+.analog-unit .lesson-layout[data-navigation='hidden'] .lesson-content { max-width: none; padding-inline: clamp(16px, 2.5vw, 48px); }
+
 .analog-unit .revision-label {
   display: inline-flex;
   margin-top: 12px;

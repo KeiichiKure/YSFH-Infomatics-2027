@@ -7,6 +7,7 @@ import { CharacterLab } from './components/CharacterLab';
 import { MediaLab, SignalLab } from './components/SignalLab';
 import type { Metadata } from 'next';
 import { ReviewTerms } from './components/ImportantTerms';
+import { LessonLayout } from './components/LessonLayout';
 import { learningSections } from './importantTerms';
 import './revision.css';
 
@@ -26,7 +27,7 @@ export default function AnalogDigitalUnit() {
         <span className="lesson-progress">02-01 · アナログとデジタル · 教科書 pp.54–56</span>
       </header>
 
-      <div className="lesson-shell">
+      <LessonLayout navigation={
         <nav className="lesson-nav" aria-label="単元内メニュー">
           <Link href="/">← 単元一覧</Link>
           <p>アナログとデジタル<br /><small>教科書 pp.54–56</small></p>
@@ -36,7 +37,7 @@ export default function AnalogDigitalUnit() {
           </ol>
           <div className="nav-note"><b>このサイトは</b><span>入力を送信・保存しません。自分のペースで何度でも試せます。</span></div>
         </nav>
-
+      }>
         <article className="lesson-content">
           <section className="lesson-intro">
             <p className="eyebrow">UNIT 02-01 · ANALOG &amp; DIGITAL</p>
@@ -81,7 +82,7 @@ export default function AnalogDigitalUnit() {
             <div><Link href="/third-party-notices.txt">第三者ライセンス</Link><Link href="/">← 単元一覧へ戻る</Link></div>
           </footer>
         </article>
-      </div>
+      </LessonLayout>
     </main>
   );
 }
