@@ -44,7 +44,13 @@ GitHubの2027年度用リポジトリで、**Settings → Pages → Build and de
 - 公開URL：`https://KeiichiKure.github.io/YSFH-Infomatics-2027`
 - 改訂見本：`https://KeiichiKure.github.io/YSFH-Infomatics-2027/units/02-01/`
 
-通常、独自のSecretsや有料サービスの設定は不要です。Actionsを制限している場合は、このリポジトリのワークフローが実行できる設定にします。初回push時にPagesが未設定でデプロイに失敗した場合は、上記設定後にActionsの「GitHub Pagesへ公開」を再実行します。
+通常、独自のSecretsや有料サービスの設定は不要です。Actionsを制限している場合は、このリポジトリのワークフローが実行できる設定にします。
+
+初回push時にPagesが未設定で公開に失敗した場合は、上記設定後にActionsの「GitHub Pagesへ公開」を **Re-run all jobs** で再実行するか、ワークフロー一覧の **Run workflow** から新しく実行してください。
+
+公開用ファイル（`github-pages`）の保管期間は既定で1日です。日を置いて **Re-run failed jobs** で公開処理だけを再実行すると、生成済みファイルが期限切れで見つからないことがあります。その場合も、生成から公開まで全体を実行し直します。教材のソースや公開済みページが消えたという意味ではありません。
+
+再実行の公式説明：<https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs>
 
 Pagesの公式説明：<https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site>
 
