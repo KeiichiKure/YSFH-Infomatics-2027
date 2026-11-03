@@ -31,7 +31,7 @@ function SignalCanvas({ samples, levels, noise, showAnalog, showDigital }: Signa
       const graphWidth = width - pad.left - pad.right;
       const graphHeight = height - pad.top - pad.bottom;
       ctx.clearRect(0, 0, width, height);
-      ctx.font = '12px "BIZ UDPGothic", sans-serif';
+      ctx.font = '14px "BIZ UDPGothic", sans-serif';
       ctx.fillStyle = '#586a7d';
       ctx.fillText('段階値', 7, 14);
 
@@ -53,13 +53,13 @@ function SignalCanvas({ samples, levels, noise, showAnalog, showDigital }: Signa
         ctx.setLineDash([3, 4]);
         ctx.beginPath(); ctx.moveTo(x, pad.top); ctx.lineTo(x, pad.top + graphHeight); ctx.stroke();
         ctx.setLineDash([]);
-        ctx.font = '12px "BIZ UDPGothic", sans-serif';
+        ctx.font = '14px "BIZ UDPGothic", sans-serif';
         ctx.fillStyle = '#586a7d';
         ctx.textAlign = 'center';
         ctx.fillText(String(index + 1), x, pad.top + graphHeight + 18);
       }
       ctx.textAlign = 'center';
-      ctx.font = '12px "BIZ UDPGothic", sans-serif';
+      ctx.font = '14px "BIZ UDPGothic", sans-serif';
       ctx.fillStyle = '#586a7d';
       ctx.fillText(`測定回（全${samples}回）`, pad.left + graphWidth / 2, height - 7);
 
@@ -120,7 +120,7 @@ function SignalCanvas({ samples, levels, noise, showAnalog, showDigital }: Signa
         ctx.stroke();
         points.forEach((point) => {
           ctx.beginPath(); ctx.arc(point.x, point.y, 4, 0, Math.PI * 2); ctx.fill();
-          ctx.font = 'bold 12px "BIZ UDPGothic", sans-serif';
+          ctx.font = 'bold 14px "BIZ UDPGothic", sans-serif';
           ctx.textAlign = 'center';
           ctx.fillText(String(point.level), point.x, point.y - 9);
         });
