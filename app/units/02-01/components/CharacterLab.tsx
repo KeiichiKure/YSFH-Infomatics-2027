@@ -75,6 +75,7 @@ export function CharacterLab() {
         <div className="character-picker" aria-label="比較する文字">
           {samples.map((item, index) => <button type="button" key={item.char} className={sampleIndex === index ? 'selected' : ''} aria-pressed={sampleIndex === index} onClick={() => setSampleIndex(index)}><strong>{item.char}</strong><span>{item.name}</span></button>)}
         </div>
+        <div className="character-comparison">
         <div className="encoding-stage">
           <div className="chosen-character"><span>文字</span><strong>{sample.char}</strong></div>
           <div className="encoding-arrows" aria-hidden="true"><i>↘</i><i>→</i><i>↗</i></div>
@@ -84,21 +85,25 @@ export function CharacterLab() {
             <div><span>Unicodeコードポイント</span><strong>U+{sample.unicodeHex}</strong><small>文字に割り当てた番号</small></div>
           </div>
         </div>
-        <div className="codepoint-explainer">
-          <div><span>① 文字</span><strong>{sample.char}</strong><small>人そのもの</small></div>
-          <i aria-hidden="true">→</i>
-          <div><span>② コードポイント</span><strong>U+{sample.unicodeHex}</strong><small>世界共通の「文字番号」</small></div>
-          <i aria-hidden="true">→</i>
-          <div><span>③ UTF-8のバイト列</span><strong>{hexBytes(utf8)}</strong><small>保存・送信用に並べたデータ</small></div>
-          <p><b>たとえるなら、コードポイントは生徒に割り当てる「出席番号」、バイト列はその番号をコンピュータへ渡すための「書き方」です。</b>同じ文字番号でも、UTF-8やUTF-16など書き方の規則が変われば、保存されるデータの並びも変わります。</p>
-          <a href="https://developer.mozilla.org/ja/docs/Glossary/Code_point" target="_blank" rel="noreferrer">発展：日本語でコードポイントの説明を見る ↗</a>
-        </div>
         <div className="utf8-box">
           <div><p className="step-label">UTF-8で保存</p><h3>U+{sample.unicodeHex} → {utf8.length}バイト</h3></div>
           <div className="byte-blocks" aria-label={`UTF-8で${utf8.length}バイト`}>{utf8.map((byte, index) => <span key={`${byte}-${index}`}><b>{byte.toString(16).toUpperCase().padStart(2, '0')}</b><small>{byte.toString(2).padStart(8, '0')}</small></span>)}</div>
         </div>
+        </div>
         <div className="variable-length"><div><span>A</span><b>1 byte</b></div><div><span>é</span><b>2 bytes</b></div><div><span>あ</span><b>3 bytes</b></div><div><span>😀</span><b>4 bytes</b></div><p><mark>可変長</mark>：文字によって使うバイト数が変わる</p></div>
+      </div>
 
+      <div className="codepoint-explainer">
+        <div><span>① 文字</span><strong>{sample.char}</strong><small>人そのもの</small></div>
+        <i aria-hidden="true">→</i>
+        <div><span>② コードポイント</span><strong>U+{sample.unicodeHex}</strong><small>世界共通の「文字番号」</small></div>
+        <i aria-hidden="true">→</i>
+        <div><span>③ UTF-8のバイト列</span><strong>{hexBytes(utf8)}</strong><small>保存・送信用に並べたデータ</small></div>
+        <p><b>たとえるなら、コードポイントは生徒に割り当てる「出席番号」、バイト列はその番号をコンピュータへ渡すための「書き方」です。</b>同じ文字番号でも、UTF-8やUTF-16など書き方の規則が変われば、保存されるデータの並びも変わります。</p>
+        <a href="https://developer.mozilla.org/ja/docs/Glossary/Code_point" target="_blank" rel="noreferrer">発展：日本語でコードポイントの説明を見る ↗</a>
+      </div>
+
+      <div className="character-reference">
         <div className="symbol-identity" aria-label="円記号とバックスラッシュの区別">
           <div><span>円記号</span><strong>¥</strong><code>U+00A5</code></div>
           <i aria-hidden="true">≠</i>

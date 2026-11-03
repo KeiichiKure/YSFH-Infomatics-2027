@@ -40,16 +40,19 @@ export default function AnalogDigitalUnit() {
       }>
         <article className="lesson-content">
           <section className="lesson-intro">
+            <div className="intro-copy">
             <p className="eyebrow">UNIT 02-01 · ANALOG &amp; DIGITAL</p>
-            <span className="textbook-page">教科書 pp.54–56</span>
-            <div><span className="revision-label">2027年度 改訂版</span></div>
+            <div className="intro-badges"><span className="textbook-page">教科書 pp.54–56</span><span className="revision-label">2027年度 改訂版</span></div>
             <h1>見えない情報を、<br />0と1に変えてみよう。</h1>
             <p>波形、スイッチ、数、文字。ばらばらに見える内容を「0と1で表す」という一本の線でつなぎます。</p>
+            </div>
+            <div className="intro-support">
             <div className="mission-box"><span>今日のミッション</span><strong>デジタル表現の仕組みを、操作と途中式を使って説明できる。</strong></div>
             <aside className="mascot-guide">
               <Image src={thinkingMascot} alt="考えている生徒のマスコット" priority />
               <p><b>迷ったら、まず動かしてみよう。</b><span>予想と違ったところが、いちばん大切な発見です。</span></p>
             </aside>
+            </div>
             <div className="learning-paths" aria-label="学び方を選ぶ">
               <a href="#signal"><span>はじめて</span><b>上から順番に試す</b><small>おすすめ</small></a>
               <a href="#bases"><span>練習したい</span><b>進数変換へ進む</b><small>プリント連動</small></a>

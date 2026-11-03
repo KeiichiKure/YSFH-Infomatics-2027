@@ -36,7 +36,8 @@ function ConversionSteps({ value, base }: { value: number; base: Base }) {
       steps.push({ n: current, q: Math.floor(current / 2), r: current % 2 });
       current = Math.floor(current / 2);
     }
-    return <div className="division-steps"><p>2で割り、余りを<strong>下から上へ</strong>読む</p>{steps.map((step) => <div key={step.n}><span>{step.n}</span><i>÷ 2 =</i><b>{step.q}</b><em>余り {step.r}</em></div>)}</div>;
+    const groups = Array.from({ length: Math.ceil(steps.length / 8) }, (_, index) => steps.slice(index * 8, index * 8 + 8));
+    return <div className="division-steps"><p>2で割り、余りを<strong>下から上へ</strong>読む</p><div className="division-groups">{groups.map((group, index) => <div className="division-group" key={index}>{groups.length > 1 && <p>{index * 8 + 1}〜{index * 8 + group.length}回目</p>}{group.map(step => <div className="division-row" key={step.n}><span>{step.n}</span><i>÷ 2 =</i><b>{step.q}</b><em>余り {step.r}</em></div>)}</div>)}</div></div>;
   }
   if (base === 2) {
     const width = bitWidthFor(value);
@@ -96,7 +97,9 @@ export function BaseLab() {
     <section className="learning-section" id="bases">
       <div className="section-kicker"><span>4</span><p>進法の関係 · 教科書 p.55</p></div>
       <div className="section-title-row"><div><p className="step-label">変換する</p><h2>同じ数を、3つの顔で見る</h2></div><p className="section-question">答えだけでなく、変換の道筋を説明できるようになろう。</p></div>
-      <div className="converter-panel">
+      <div className="converter-panel" data-long-division={base === 10 && value !== null && value > 255}>
+        <div className="converter-workbench">
+        <div className="converter-source">
         <div className="converter-input">
           <div className="segmented-control" aria-label="入力する進法">
             {[10, 2, 16].map((item) => <button type="button" key={item} className={base === item ? 'selected' : ''} aria-pressed={base === item} onClick={() => changeBase(item as Base)}>{item}進数から</button>)}
@@ -109,7 +112,9 @@ export function BaseLab() {
           <div><span>2進数（{outputBitWidth}ビット表示）</span><strong>{outputBinary ?? '—'}</strong></div>
           <div><span>16進数</span><strong>{outputHex ?? '—'}</strong></div>
         </div>
+        </div>
         {value !== null && <ConversionSteps value={value} base={base} />}
+        </div>
         <div className="nibble-tip expanded-nibbles" style={{ gridTemplateColumns: `repeat(${Math.max(2, binaryGroups.length)}, 1fr)` }}>{value === null ? <><span>----</span><span>----</span></> : binaryGroups.map((group, index) => <span key={`${group}-${index}`}>{group}</span>)}<i>4ビットずつ区切ると、16進数{outputHexWidth}桁になる</i></div>
         <p className="converter-capacity">通常のプリント問題は8ビットで扱います。発展として、ここでは<strong>32ビット符号なし整数（0～4294967295、16進数でFFFFFFFF）</strong>まで試せます。</p>
       </div>
