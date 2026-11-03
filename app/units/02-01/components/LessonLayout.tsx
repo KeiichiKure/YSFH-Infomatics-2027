@@ -27,17 +27,17 @@ export function LessonLayout({ navigation, children }: { navigation: ReactNode; 
             {navigationOpen ? '項目一覧を隠す' : '項目一覧を表示'}
           </button>
           <a className="review-shortcut" href="#checkpoint">まとめ・確認へ <span aria-hidden="true">↓</span></a>
+          <div id="unit-section-navigation" className="lesson-navigation" hidden={!navigationOpen} onClick={event => {
+            if ((event.target as HTMLElement).closest('a[href^="#"]')) {
+              setNavigationOpen(false);
+              toggleRef.current?.focus();
+            }
+          }}>
+            {navigation}
+          </div>
         </div>
       </div>
       <div className="lesson-shell">
-        <div id="unit-section-navigation" className="lesson-navigation" hidden={!navigationOpen} onClick={event => {
-          if ((event.target as HTMLElement).closest('a[href^="#"]')) {
-            setNavigationOpen(false);
-            toggleRef.current?.focus();
-          }
-        }}>
-          {navigation}
-        </div>
         {children}
       </div>
     </div>

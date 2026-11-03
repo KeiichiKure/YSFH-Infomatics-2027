@@ -17,6 +17,7 @@
 }
 
 .analog-unit .lesson-toolbar-inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,13 +45,13 @@
 .analog-unit .navigation-toggle:hover { background: #edf5f0; }
 .analog-unit .navigation-toggle:focus-visible { outline: 3px solid var(--teal-dark); outline-offset: 3px; }
 .analog-unit .lesson-navigation {
-  position: fixed;
-  top: 68px;
-  left: max(24px, calc((100vw - var(--lesson-width)) / 2));
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 0;
   z-index: 30;
   width: 300px;
   max-width: calc(100vw - 48px);
-  max-height: calc(100dvh - 84px);
+  max-height: calc(100dvh - 160px);
   overflow-y: auto;
   border: 1px solid #b9d0ca;
   border-radius: 14px;
@@ -427,7 +428,7 @@
   .analog-unit .lesson-shell { padding-inline: 16px; }
   .analog-unit .lesson-toolbar { padding-inline: 16px; }
   .analog-unit .lesson-content { padding-top: 24px; }
-  .analog-unit .lesson-navigation { left: 16px; max-width: calc(100vw - 32px); }
+  .analog-unit .lesson-navigation { max-width: calc(100vw - 32px); }
   .analog-unit .intro-support { grid-template-columns: 1fr; }
   .analog-unit .variable-length { grid-template-columns: 1fr 1fr; }
   .analog-unit .lesson-intro h1 { font-size: clamp(28px, 6.4vw, 40px); }
