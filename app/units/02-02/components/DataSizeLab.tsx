@@ -119,7 +119,7 @@ export function DataSizeLab() {
 
   return (
     <section className="learning-section" id="data-size">
-      <div className="section-kicker"><span>04</span><p>発展 · データ量の計算 · 教科書 p.61</p></div>
+      <div className="section-kicker"><span>4</span><p>発展 · データ量の計算 · 教科書 p.61</p></div>
       <div className="section-title-row"><div><p className="step-label">条件を掛け合わせる</p><h2>高画質にすると、何が増える？</h2></div><p className="section-question">音声と画像の条件を変え、式のどの数が結果へ効くか確かめよう。</p></div>
       <div className="data-size-grid">
         <div className="size-card">

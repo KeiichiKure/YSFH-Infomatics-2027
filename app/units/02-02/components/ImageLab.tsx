@@ -1,5 +1,8 @@
 'use client';
 
+import { SectionTerms } from '@/app/components/revision2027/ImportantTerms';
+import { importantTerms, learningSections } from '../importantTerms';
+
 import { useEffect, useRef, useState } from 'react';
 
 function setupCanvas(canvas: HTMLCanvasElement, height: number) {
@@ -189,7 +192,7 @@ export function ImageLab() {
 
   return (
     <section className="learning-section" id="images">
-      <div className="section-kicker"><span>02</span><p>画像のデジタル化 · 教科書 pp.58–59</p></div>
+      <div className="section-kicker"><span>2</span><p>画像のデジタル化 · 教科書 pp.58–59</p></div>
       <div className="section-title-row">
         <div><p className="step-label">点と色を比べる</p><h2>画像を拡大すると何が見える？</h2></div>
         <p className="section-question">画像形式、光と色の三原色、解像度、階調を別々に動かして確かめよう。</p>
@@ -204,7 +207,6 @@ export function ImageLab() {
           <div><span>ベクタ形式</span><div className="format-canvas-frame"><canvas ref={vectorCanvasRef} aria-label={zoom + '倍に拡大して描き直したベクタ画像'} /></div><b>何倍でも輪郭を描き直して滑らか</b><small>ロゴ・図形向き · svg / dxf</small></div>
         </div>
         <p className="zoom-note">外側の枠と見出しは固定したまま、同じ風景の中央だけを拡大しています。</p>
-        <div className="print-callout"><span className="print-number"><small>プリント</small><b>11</b></span><strong>画素（ピクセル）</strong><em>ラスタ画像をつくる点</em></div>
       </div>
 
       <div className="rgb-lab">
@@ -232,10 +234,6 @@ export function ImageLab() {
             </div>
           </div>
           <p className="data-tradeoff">インクは光を吸収するため、混ぜるほど暗くなります。印刷では締まった黒を表すKを加えてCMYKとします。</p>
-        </div>
-        <div className="print-callout">
-          <span className="print-number"><small>プリント</small><b>12</b></span><strong>光の三原色</strong><em>赤（R）・緑（G）・青（B）の光で色を表す</em>
-          <span className="print-number"><small>プリント</small><b>13</b></span><strong>加法混色</strong><em>光を加えるほど明るくなり、3色を最大にすると白になる</em>
         </div>
       </div>
 
@@ -267,13 +265,8 @@ export function ImageLab() {
             </div>
           </div>
         </div>
-        <div className="print-callout print-callout-four">
-          <span className="print-number"><small>プリント</small><b>14</b></span><strong>画素数</strong><em>画像をつくる画素の数。多いほど細部を表しやすい</em>
-          <span className="print-number"><small>プリント</small><b>15</b></span><strong>解像度</strong><em>一定の長さに並ぶ画素の密度。高いほど輪郭が細かい</em>
-          <span className="print-number"><small>プリント</small><b>16</b></span><strong>階調</strong><em>1色の明るさを表せる段階数。n bitなら2のn乗段階</em>
-          <span className="print-number"><small>プリント</small><b>17</b></span><strong>24ビットフルカラー</strong><em>RGBを各8 bit、合計24 bitで表す色</em>
-        </div>
       </div>
+      <SectionTerms section={learningSections[1]} terms={importantTerms} />
     </section>
   );
 }

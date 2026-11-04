@@ -1,0 +1,49 @@
+/* tokens.cssと組み合わせる。活動の図・操作には単元ごとの適合処理が必要。 */
+.unit-2027 .u27-toolbar { position: sticky; top: 0; z-index: 20; padding: 8px 24px; border-bottom: 1px solid var(--u27-line); background: var(--u27-paper); }
+.unit-2027 .u27-toolbar-inner { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: var(--u27-content-width); margin: auto; }
+.unit-2027 .u27-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px; border: 1px solid var(--u27-green); border-radius: 9px; background: white; color: var(--u27-green); font-size: var(--u27-control); font-weight: 800; cursor: pointer; }
+.unit-2027 .u27-review-shortcut { color: var(--u27-green); font-size: var(--u27-control); padding-block: 10px; }
+.unit-2027 .u27-menu { position: absolute; top: calc(100% + 16px); left: 0; z-index: 30; width: 300px; max-width: calc(100vw - 48px); max-height: calc(100dvh - 160px); overflow-y: auto; padding: 20px; border: 1px solid var(--u27-line); border-radius: 14px; background: var(--u27-paper); box-shadow: 0 12px 36px #20355326; }
+.unit-2027 .u27-menu[hidden] { display: none; }
+.unit-2027 .u27-menu nav { position: static; min-height: 0; border: 0; padding: 0; }
+.unit-2027 .u27-menu a { display: block; min-height: 44px; padding: 8px; font-size: var(--u27-control); }
+.unit-2027 .u27-content { max-width: calc(var(--u27-content-width) + 48px); min-width: 0; padding: 36px 24px 64px; margin: auto; }
+.unit-2027 .u27-section { margin-top: 64px; scroll-margin-top: 84px; }
+.unit-2027 .u27-section-title { font-size: var(--u27-section); line-height: 1.4; }
+.unit-2027 .u27-activity-title { font-size: var(--u27-heading); line-height: 1.4; }
+.unit-2027 .u27-body { font-size: var(--u27-body); }
+.unit-2027 .u27-small { font-size: var(--u27-small); line-height: 1.5; }
+.unit-2027 .u27-value { font-size: var(--u27-value); }
+.unit-2027 .u27-section-terms { margin-top: 28px; padding: 20px; border: 1px solid var(--u27-line); border-radius: 14px; background: #f2f7f2; }
+.unit-2027 .u27-terms-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 14px; }
+.unit-2027 .u27-terms-heading h3 { margin: 0; font-size: var(--u27-heading); }
+.unit-2027 .u27-terms-heading > span { font-size: var(--u27-small); color: var(--u27-muted); }
+.unit-2027 .u27-term-cards { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin: 0; }
+.unit-2027 .u27-term-cards > div { display: grid; grid-template-columns: minmax(90px,.7fr) minmax(0,1.5fr); gap: 10px; min-width: 0; padding: 14px 16px; border: 1px solid var(--u27-line); border-radius: 9px; background: white; }
+.unit-2027 .u27-term-cards dt, .unit-2027 .u27-term-cards dd { font-size: var(--u27-term); overflow-wrap: anywhere; }
+.unit-2027 .u27-term-cards dt { font-weight: 800; }
+.unit-2027 .u27-term-cards dd { margin: 0; color: var(--u27-muted); }
+.unit-2027 .u27-review { max-width: var(--u27-review-width); margin-inline: auto; }
+.unit-2027 .u27-review h2 { font-size: var(--u27-section); line-height: 1.4; }
+.unit-2027 .u27-review-guide { font-size: var(--u27-review); color: var(--u27-muted); }
+.unit-2027 .u27-review-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px 16px; margin-top: 20px; }
+.unit-2027 .u27-review-row { display: flex; align-items: flex-start; gap: 8px; min-width: 0; }
+.unit-2027 .u27-section-link { display: grid; place-items: center; flex: 0 0 44px; min-height: 44px; border-radius: 8px; background: var(--u27-green); color: white; font-size: var(--u27-control); font-weight: 800; }
+.unit-2027 .u27-review-row details { min-width: 0; flex: 1; border: 1px solid var(--u27-line); border-radius: 9px; background: white; }
+.unit-2027 .u27-review-row summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 44px; padding: 10px 14px; list-style: none; font-size: var(--u27-review); font-weight: 800; cursor: pointer; overflow-wrap: anywhere; }
+.unit-2027 .u27-review-row summary::-webkit-details-marker { display: none; }
+.unit-2027 .u27-review-row summary::after { content: '+'; flex: none; color: var(--u27-green); }
+.unit-2027 .u27-review-row details[open] summary::after { content: '−'; }
+.unit-2027 .u27-review-row p { margin: 0; padding: 0 14px 12px; font-size: var(--u27-review); color: var(--u27-muted); overflow-wrap: anywhere; }
+.unit-2027 .u27-review-row p a { color: var(--u27-green); text-decoration: underline; }
+.unit-2027 :focus-visible { outline: 3px solid var(--u27-green); outline-offset: 3px; }
+@media (max-width: 700px) {
+  .unit-2027 .u27-toolbar { padding-inline: 16px; }
+  .unit-2027 .u27-toggle { padding-inline: 10px; }
+  .unit-2027 .u27-review-shortcut { font-size: var(--u27-small); }
+  .unit-2027 .u27-menu { max-width: calc(100vw - 32px); }
+  .unit-2027 .u27-content { padding: 24px 16px 48px; }
+  .unit-2027 .u27-section { margin-top: 44px; }
+  .unit-2027 .u27-term-cards, .unit-2027 .u27-review-list { grid-template-columns: minmax(0,1fr); }
+  .unit-2027 .u27-term-cards > div { grid-template-columns: 1fr; gap: 4px; }
+}

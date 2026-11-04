@@ -1,5 +1,8 @@
 'use client';
 
+import { SectionTerms } from '@/app/components/revision2027/ImportantTerms';
+import { importantTerms, learningSections } from '../importantTerms';
+
 import { useEffect, useRef, useState } from 'react';
 
 function binary(value: number, bits: number) {
@@ -40,7 +43,7 @@ function periodLabel(frequency: number) {
 }
 
 function prepareCanvas(canvas: HTMLCanvasElement, height: number) {
-  const width = Math.max(320, canvas.getBoundingClientRect().width);
+  const width = Math.max(1, canvas.getBoundingClientRect().width);
   const dpr = window.devicePixelRatio || 1;
   canvas.width = Math.round(width * dpr);
   canvas.height = Math.round(height * dpr);
@@ -185,17 +188,19 @@ export function SamplingLab() {
       }
       context.restore();
 
-      context.font = '12px "BIZ UDPGothic", sans-serif';
+      context.font = '14px "BIZ UDPGothic", sans-serif';
       context.fillStyle = '#586a7d';
       context.fillText('振幅', 4, 20);
-      context.fillText(graphZoom === 1 ? '1秒' : '時間・振幅を拡大', right - (graphZoom === 1 ? 18 : 94), height - 10);
+      const compactLegend = width < 520;
+      const timeLabel = graphZoom === 1 ? '1秒' : compactLegend ? `${graphZoom.toLocaleString()}倍` : '時間・振幅を拡大';
+      context.fillText(timeLabel, right - context.measureText(timeLabel).width, height - 10);
       if (showAnalog) {
         context.fillStyle = '#e88466';
-        context.fillText('アナログ（元の波）', left, height - 10);
+        context.fillText('アナログ（元の波）', left, height - (compactLegend ? 28 : 10));
       }
       if (showDigital) {
         context.fillStyle = '#2f7c7a';
-        context.fillText('デジタル（量子化後）', left + (showAnalog ? 126 : 0), height - 10);
+        context.fillText('デジタル（量子化後）', left + (showAnalog && !compactLegend ? context.measureText('アナログ（元の波）').width + 18 : 0), height - 10);
       }
     };
     draw();
@@ -205,7 +210,7 @@ export function SamplingLab() {
 
   return (
     <section className="learning-section" id="sampling">
-      <div className="section-kicker"><span>01</span><p>標本化・量子化・符号化 · 教科書 p.57</p></div>
+      <div className="section-kicker"><span>1</span><p>標本化・量子化・符号化 · 教科書 p.57</p></div>
       <div className="section-title-row">
         <div><p className="step-label">波をデータにする</p><h2>どこで「デジタル」になる？</h2></div>
         <p className="section-question">全体では重なって見える高精度な波も、拡大すると標本ごとの段差があることを確かめよう。</p>
@@ -261,15 +266,8 @@ export function SamplingLab() {
           {sampleCodes.map((sample, index) => <div key={sample.time + '-' + index}><span>標本{index + 1}</span><b>{sample.level.toLocaleString()}</b><code>{binary(sample.level, quantizationBits)}</code></div>)}
         </div>
         <p className="data-tradeoff">1秒分の値だけで <strong>{(samplingFrequency * quantizationBits).toLocaleString()} bit</strong>。標本化周波数や量子化ビット数を増やすと元の波に近づきますが、データ量も増えます。</p>
-        <div className="print-callout print-callout-four"><span className="print-number"><small>プリント</small><b>1・2</b></span><strong>波・振幅</strong><em>波の大きさが連続して変わるアナログ量</em></div>
-        <div className="print-callout print-callout-four">
-          <span className="print-number"><small>プリント</small><b>3</b></span><strong>サンプリング（標本化）</strong><em>アナログ量を一定の時間間隔で取り出すこと</em>
-          <span className="print-number"><small>プリント</small><b>4</b></span><strong>標本点</strong><em>サンプリングによって取り出した1つ1つの値</em>
-          <span className="print-number"><small>プリント</small><b>5</b></span><strong>量子化ビット数</strong><em>1つの標本値を何段階で表すかを決めるビット数</em>
-          <span className="print-number"><small>プリント</small><b>6</b></span><strong>量子化誤差</strong><em>元の標本値と、段階にそろえた量子化後の値との差</em>
-        </div>
-        <div className="print-callout print-callout-four"><span className="print-number"><small>プリント</small><b>7・8</b></span><strong>周波数・周期</strong><em>1秒間の波の数と、波1個分にかかる時間</em><span className="print-number"><small>プリント</small><b>9</b></span><strong>標本化定理</strong><em>元の最高周波数の2倍より大きい周波数で標本化する</em></div>
       </div>
+      <SectionTerms section={learningSections[0]} terms={importantTerms} />
     </section>
   );
 }

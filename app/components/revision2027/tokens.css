@@ -1,0 +1,24 @@
+/* 改訂する単元だけに unit-2027 を付ける。文字サイズの共通変更はここで行う。 */
+.unit-2027 {
+  --u27-body: 18px;
+  --u27-term: 18px;
+  --u27-review: 16px;
+  --u27-control: 16px;
+  --u27-small: 14px;
+  --u27-section: 36px;
+  --u27-heading: 22px;
+  --u27-value: 26px;
+  --u27-content-width: 1120px;
+  --u27-review-width: 960px;
+  --u27-ink: #203553;
+  --u27-muted: #586a7d;
+  --u27-green: #2f7c7a;
+  --u27-paper: #fffcf4;
+  --u27-line: #d8e3df;
+  color: var(--u27-ink);
+  font-size: var(--u27-body);
+  line-height: 1.65;
+}
+@media (max-width: 700px) {
+  .unit-2027 { --u27-section: 28px; }
+}

@@ -1,5 +1,8 @@
 'use client';
 
+import { SectionTerms } from '@/app/components/revision2027/ImportantTerms';
+import { importantTerms, learningSections } from '../importantTerms';
+
 import { useEffect, useState, type PointerEvent as ReactPointerEvent } from 'react';
 import Image from 'next/image';
 import arStreetPhoto from '@/public/images/02-02/ar-street-photo.jpg';
@@ -57,27 +60,23 @@ export function MotionLab() {
 
   return (
     <section className="learning-section" id="motion">
-      <div className="section-kicker"><span>03</span><p>動画と立体の表現 · 教科書 p.60</p></div>
+      <div className="section-kicker"><span>3</span><p>動画と立体の表現 · 教科書 p.60</p></div>
       <div className="section-title-row"><div><p className="step-label">時間と奥行きをつくる</p><h2>静止画は、どう動いて見える？</h2></div><p className="section-question">1秒あたりの枚数と、立体に見せる手がかりを変えてみよう。</p></div>
       <div className="motion-lab-panel">
         <div className="lab-heading"><div><p className="step-label">FRAME RATE</p><h3>フレームを速くめくる</h3></div><span className="print-badge"><small>プリント</small><b>18・19</b></span></div>
         <label className="frame-control"><span>フレームレート <output>{frameRate} fps</output></span><input type="range" min="2" max="60" value={frameRate} onChange={(event) => setFrameRate(Number(event.target.value))} /></label>
         <div className="playback-toolbar">
+          <button type="button" className="frame-step-button" disabled={currentFrame <= 1} onClick={() => stepFrame(-1)}>← 前のフレーム</button>
           <button type="button" className={playing ? 'is-active' : ''} onClick={() => setPlaying((value) => !value)}>{playing ? '一時停止' : '再生する'}</button>
+          <button type="button" className="frame-step-button" onClick={() => stepFrame(1)}>次のフレーム →</button>
           <button type="button" className={playbackRate === 1 ? 'is-active' : ''} onClick={() => setPlaybackRate(1)}>通常 ×1</button>
           <button type="button" className={playbackRate === 0.25 ? 'is-active' : ''} onClick={() => setPlaybackRate(0.25)}>スロー ×0.25</button>
-          <button type="button" className="frame-step-button" disabled={currentFrame <= 1} onClick={() => stepFrame(-1)}>← 前のフレーム</button>
-          <button type="button" className="frame-step-button" onClick={() => stepFrame(1)}>次のフレーム →</button>
           <button type="button" onClick={() => { setElapsed(0); setPlaying(true); }}>最初から</button>
         </div>
         <div className="motion-clock" aria-live="polite"><div><small>開始から</small><strong>{elapsed.toFixed(2)} 秒</strong></div><div><small>現在のフレーム</small><strong>{currentFrame.toLocaleString()} 枚目</strong></div><div><small>再生状態</small><strong>{playing ? (playbackRate === 1 ? '通常' : '1/4スロー') : '一時停止／コマ送り'}</strong></div></div>
         <div className="motion-track" aria-label={frameRate + 'fpsの動きの模式表示'}><div className="motion-runner" style={{ left: 'calc(' + (2 + runnerPosition * 88) + '%)' }}><i /><b>→</b></div></div>
         <p className="fps-note"><b>表示は動き方のイメージです。</b> 60 fpsを選んでも、端末の画面更新速度やブラウザの負荷により、実際に毎秒60回描画されるとは限りません。</p>
         <div className="frame-explainer"><div><b>1フレーム</b><span>動画を構成する1枚の静止画</span></div><i aria-hidden="true">×</i><div><b>{frameRate} fps</b><span>1秒間に{frameRate}枚を再生</span></div><i aria-hidden="true">＝</i><div><b>5分で {(frameRate * 300).toLocaleString()}枚</b><span>枚数が増えるほど滑らか</span></div></div>
-        <div className="print-callout">
-          <span className="print-number"><small>プリント</small><b>18</b></span><strong>フレーム</strong><em>動画を構成する1枚ずつの静止画像</em>
-          <span className="print-number"><small>プリント</small><b>19</b></span><strong>fps</strong><em>1秒間に表示するフレーム数。大きいほど滑らかに見える</em>
-        </div>
       </div>
 
       <div className="depth-lab">
@@ -133,11 +132,8 @@ export function MotionLab() {
             <p><b>MRの特徴：</b>現実の手が仮想模型より手前にあると判定し、重なった部分で模型を隠す「遮蔽（オクルージョン）」が起こります。</p>
           </div>
         </div>
-        <div className="print-callout">
-          <span className="print-number"><small>プリント</small><b>20</b></span><strong>3DCG</strong><em>遠近法・重なり・陰影などで平面に立体を表現する技術</em>
-          <span className="print-number"><small>プリント</small><b>21</b></span><strong>視差</strong><em>左右の目に届く像のずれ。脳が奥行きを判断する手がかり</em>
-        </div>
       </div>
+      <SectionTerms section={learningSections[2]} terms={importantTerms} />
     </section>
   );
 }
