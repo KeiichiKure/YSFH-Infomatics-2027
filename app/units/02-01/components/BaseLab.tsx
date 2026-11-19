@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
+import { BaseCounter } from './BaseCounter';
 import { SectionTerms } from './ImportantTerms';
 import understoodMascot from '@/public/mascots/student-understood.png';
 
@@ -97,6 +98,7 @@ export function BaseLab() {
     <section className="learning-section" id="bases">
       <div className="section-kicker"><span>4</span><p>進法の関係 · 教科書 p.55</p></div>
       <div className="section-title-row"><div><p className="step-label">変換する</p><h2>同じ数を、3つの顔で見る</h2></div><p className="section-question">答えだけでなく、変換の道筋を説明できるようになろう。</p></div>
+      <BaseCounter />
       <div className="converter-panel" data-long-division={base === 10 && value !== null && value > 255}>
         <div className="converter-workbench">
         <div className="converter-source">
