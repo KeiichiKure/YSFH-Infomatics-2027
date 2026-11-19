@@ -25,8 +25,3 @@ export const importantTerms = [
   { id: 'platform-dependent', sectionNumber: 5, term: '機種依存文字', definition: '旧来の環境によって表示が異なる文字。' },
   { id: 'variable-length', sectionNumber: 5, term: '可変長', definition: '文字ごとに使う長さが変わる。' },
 ] as const;
-
-// One review row per term; its other appearances remain reachable from the definition.
-export const reviewTerms = importantTerms.filter((entry, index, entries) =>
-  entries.findIndex(other => other.term === entry.term) === index,
-);

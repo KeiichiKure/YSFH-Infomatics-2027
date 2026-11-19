@@ -26,7 +26,6 @@ export function LessonLayout({ navigation, children }: { navigation: ReactNode; 
             <span aria-hidden="true">{navigationOpen ? '〈' : '☰'}</span>
             {navigationOpen ? '項目一覧を隠す' : '項目一覧を表示'}
           </button>
-          <a className="review-shortcut" href="#checkpoint">まとめ・確認へ <span aria-hidden="true">↓</span></a>
           <div id="unit-section-navigation" className="lesson-navigation" hidden={!navigationOpen} onClick={event => {
             if ((event.target as HTMLElement).closest('a[href^="#"]')) {
               setNavigationOpen(false);

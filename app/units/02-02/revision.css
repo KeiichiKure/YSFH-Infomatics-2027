@@ -1,4 +1,4 @@
-.digital-unit .unit-2027 { --u27-body: 18px; --u27-term: 18px; --u27-review: 16px; }
+.digital-unit .unit-2027 { --u27-body: 18px; --u27-term: 18px; }
 .digital-unit .brand { font-size: 19px; }
 .digital-unit .lesson-progress { font-size: 15px; }
 .digital-unit .lesson-nav > p { display: block; margin: 18px 0 12px; }
@@ -29,7 +29,7 @@
 .digital-unit .learning-section { margin-top: 64px; scroll-margin-top: 84px; }
 .digital-unit .section-kicker p, .digital-unit .step-label { font-size: 15px; }
 .digital-unit .section-title-row { grid-template-columns: minmax(0,1fr) 300px; gap: 24px; margin-bottom: 20px; }
-.digital-unit .section-title-row h2, .digital-unit .u27-review h2 { font-size: var(--u27-section); line-height: 1.4; }
+.digital-unit .section-title-row h2 { font-size: var(--u27-section); line-height: 1.4; }
 .digital-unit .section-question { font-size: 16px; line-height: 1.6; }
 .digital-unit :is(.digit-lab-panel,.image-format-lab,.rgb-lab,.resolution-lab,.motion-lab-panel,.depth-lab,.size-card) { padding: 24px; border-radius: 16px; scroll-margin-top: 84px; }
 .digital-unit :is(.lab-heading h3,.size-card h3) { font-size: var(--u27-heading); line-height: 1.4; }
@@ -56,7 +56,6 @@
 .digital-unit .size-card:nth-child(2) > .size-formula { grid-column: 3; grid-row: 1/9; }
 .digital-unit .size-card:nth-child(2) label { grid-template-columns: minmax(0,1fr); }
 .digital-unit .quality-preview p { margin: 0; }
-.digital-unit .u27-review p { font-size: var(--u27-review); }
 .digital-unit .u27-content :is(button,select) { min-height: 44px; font-size: var(--u27-control); }
 .digital-unit .u27-content :is(.range-card > span,.digit-controls label > span,.resolution-controls label > span,.frame-control > span,.size-card label > span,.depth-controls label,.zoom-slider,.parallax-control label) { font-size: var(--u27-control); }
 .digital-unit .u27-content :is(.range-card small,.range-card .period-readout,.sampling-zoom-toolbar > span,.wave-display-toolbar > span,.quantization-range-label small,.quantization-range-label strong,.zoom-note,.format-compare small,.resolution-stage small,.linked-dimension small,.depth-stage > small,.reality-scene > b,.reality-scene > em) { font-size: var(--u27-small); }
@@ -116,9 +115,6 @@
 .digital-unit .size-conversion p strong { font-size: 20px; overflow-wrap: anywhere; }
 .digital-unit .size-conversion p strong small { font-size: 14px; }
 .digital-unit .size-card { min-width: 0; }
-.digital-unit .checkpoint { max-width: var(--u27-review-width); margin-inline: auto; }
-.digital-unit .final-challenge { padding: 24px; box-shadow: none; }
-.digital-unit .final-challenge h3 { font-size: var(--u27-heading); }
 .digital-unit .lesson-footer { margin-top: 56px; font-size: 14px; }
 .digital-unit .lesson-footer p { font-size: 14px; }
 @media (max-width: 860px) {
@@ -155,8 +151,6 @@
   .digital-unit .sample-code-row.high-bit-values { grid-template-columns: minmax(0,1fr); }
   .digital-unit .size-card label { grid-template-columns: 1fr; }
   .digital-unit .decimal-conversion p { grid-template-columns: 1fr; }
-  .digital-unit .digit-final { grid-template-columns: 1fr; }
-  .digital-unit .digit-final > img { width: 96px; height: 110px; }
   .digital-unit .reality-cards-large > .reality-card { grid-template-columns: minmax(0,1fr); padding: 16px; }
   .digital-unit .reality-cards-large .reality-scene { grid-column: 1; grid-row: auto; }
 }

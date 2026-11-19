@@ -6,7 +6,6 @@ import { BinaryLab } from './components/BinaryLab';
 import { CharacterLab } from './components/CharacterLab';
 import { MediaLab, SignalLab } from './components/SignalLab';
 import type { Metadata } from 'next';
-import { ReviewTerms } from './components/ImportantTerms';
 import { LessonLayout } from './components/LessonLayout';
 import { learningSections } from './importantTerms';
 import './revision.css';
@@ -33,7 +32,6 @@ export default function AnalogDigitalUnit() {
           <p>アナログとデジタル<br /><small>教科書 pp.54–56</small></p>
           <ol>
             {learningSections.map(section => <li key={section.id}><a href={`#${section.id}`}>{section.number}　{section.label}</a></li>)}
-            <li><a href="#checkpoint">✓　まとめ・確認</a></li>
           </ol>
           <div className="nav-note"><b>このサイトは</b><span>入力を送信・保存しません。自分のペースで何度でも試せます。</span></div>
         </nav>
@@ -65,19 +63,6 @@ export default function AnalogDigitalUnit() {
           <BinaryLab />
           <BaseLab />
           <CharacterLab />
-
-          <section className="learning-section checkpoint" id="checkpoint">
-            <div className="section-kicker"><span>✓</span><p>まとめ・確認</p></div>
-            <div className="review-heading"><h2>重要語を確認する</h2><p>緑の数字は、このWebページの学習節です。数字から体験に戻れます。</p></div>
-            <p className="review-hint">語句を押すと意味が開きます。もう一度押すと閉じます。</p>
-            <ReviewTerms />
-            <div className="final-challenge">
-              <p className="step-label">最後の問い</p>
-              <h3>「デジタルは0と1で表す」とは、具体的にどういうこと？</h3>
-              <ol><li>連続量をどのように区切るか</li><li>0と1を現実の媒体でどう表すか</li><li>数や文字をどう0と1へ対応させるか</li></ol>
-              <p>この3点を、隣の人に60秒で説明できたら今日のミッション達成です。</p>
-            </div>
-          </section>
 
           <footer className="lesson-footer">
             <div><b>理数情報ラボ</b><span>高校 情報Ⅰ · Web教材</span></div>

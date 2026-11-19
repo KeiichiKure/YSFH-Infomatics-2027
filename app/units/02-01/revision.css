@@ -1,6 +1,5 @@
 .analog-unit {
   --term-text: 18px;
-  --review-text: 16px;
   --lesson-width: 1120px;
   font-size: 18px;
   line-height: 1.65;
@@ -25,8 +24,6 @@
   max-width: var(--lesson-width);
   margin: auto;
 }
-.analog-unit .review-shortcut { color: var(--teal-dark); font-size: 16px; font-weight: 800; padding: 10px 0; }
-.analog-unit .review-shortcut:hover { text-decoration: underline; text-underline-offset: 4px; }
 .analog-unit .navigation-toggle {
   display: inline-flex;
   align-items: center;
@@ -228,8 +225,6 @@
 .analog-unit .symbol-grid { max-width: 720px; margin: 16px auto 0; }
 .analog-unit .symbol-grid button { aspect-ratio: auto; min-height: 54px; }
 .analog-unit .result-legend { font-size: 16px; }
-.analog-unit .final-challenge { padding: 24px; box-shadow: none; }
-.analog-unit .final-challenge h3 { font-size: 22px; }
 .analog-unit .lesson-footer { margin-top: 56px; font-size: 14px; }
 
 .analog-unit .revision-label {
@@ -306,94 +301,6 @@
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
-
-.analog-unit .review-heading h2 {
-  margin: 12px 0;
-  font-size: 36px;
-  line-height: 1.4;
-}
-
-.analog-unit .review-heading > p,
-.analog-unit .review-hint {
-  margin: 8px 0;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-.analog-unit .review-terms {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px 16px;
-  margin: 20px 0;
-}
-
-.analog-unit .review-term {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  min-width: 0;
-}
-
-.analog-unit .review-section-link {
-  display: grid;
-  place-items: center;
-  flex: 0 0 44px;
-  min-height: 44px;
-  border-radius: 8px;
-  color: white;
-  background: var(--teal);
-  font-size: 18px;
-  font-weight: 800;
-}
-
-.analog-unit .review-section-link:hover {
-  background: var(--teal-dark);
-}
-
-.analog-unit .review-term details {
-  flex: 1;
-  min-width: 0;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  background: white;
-}
-
-.analog-unit .review-term summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 44px;
-  padding: 10px 14px;
-  list-style: none;
-  color: var(--ink);
-  font-size: var(--review-text);
-  font-weight: 800;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-  cursor: pointer;
-}
-
-.analog-unit .review-term summary::-webkit-details-marker { display: none; }
-.analog-unit .review-term summary::after { content: '+'; flex: none; color: var(--teal-dark); font-size: 22px; line-height: 1; }
-.analog-unit .review-term details[open] summary::after { content: '−'; }
-.analog-unit .review-term details[open] { border-color: #80aaa1; }
-.analog-unit .review-term summary:hover { background: #f2f7f2; border-radius: 9px; }
-
-.analog-unit .review-term p {
-  margin: 0;
-  padding: 0 14px 12px;
-  color: var(--muted);
-  font-size: var(--review-text);
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-}
-
-.analog-unit .review-related a { color: var(--teal-dark); text-decoration: underline; text-underline-offset: 3px; }
-.analog-unit .review-term :focus-visible { outline: 3px solid var(--teal-dark); outline-offset: 3px; }
-.analog-unit .lesson-nav a[href='#checkpoint'] { font-weight: 800; }
-.analog-unit .checkpoint { max-width: 960px; margin-inline: auto; }
 
 @media (max-width: 1000px) {
   .analog-unit .character-comparison { grid-template-columns: 1fr; }
@@ -483,9 +390,7 @@
   .analog-unit .celebration-mascot { grid-column: 2; width: 72px; height: 72px; }
   .analog-unit .section-terms { padding: 16px; }
   .analog-unit .section-terms-list,
-  .analog-unit .review-terms { grid-template-columns: minmax(0, 1fr); }
   .analog-unit .section-terms-list > div { grid-template-columns: 1fr; gap: 4px; }
-  .analog-unit .review-heading h2 { font-size: 28px; }
 }
 
 /* 文字サイズを1段階拡大。共通CSSから継承する文字も補う。 */
@@ -522,7 +427,6 @@
 @media (max-width: 700px) {
   .analog-unit .lesson-toolbar-inner { gap: 8px; }
   .analog-unit .navigation-toggle { padding-inline: 10px; }
-  .analog-unit .review-shortcut { font-size: 14px; }
   .analog-unit .division-steps { padding: 10px; }
   .analog-unit .division-steps > .division-groups { grid-template-columns: minmax(0, 1fr); }
   .analog-unit .division-row { grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr); }

@@ -835,8 +835,6 @@ button, input { font: inherit; }
 .size-formula span, .size-formula strong { display: block; }
 .size-formula span { color: #d4e4de; font: 10px Consolas, monospace; }
 .size-formula strong { margin-top: 4px; color: var(--yellow); font-size: 25px; }
-.digit-final { display: grid; grid-template-columns: 130px 1fr; align-items: center; gap: 20px; }
-.digit-final > img { width: 130px; height: 150px; object-fit: contain; }
 
 @media (max-width: 860px) {
   .digit-controls { grid-template-columns: 1fr; }
@@ -856,8 +854,6 @@ button, input { font: inherit; }
   .rgb-controls label { grid-template-columns: 85px 1fr; }
   .reality-cards { grid-template-columns: 1fr; }
   .size-card label { grid-template-columns: 1fr; }
-  .digit-final { grid-template-columns: 82px 1fr; }
-  .digit-final > img { width: 82px; height: 104px; }
 }
 
 /* 02-02 改訂：高密度操作と視覚比較 */

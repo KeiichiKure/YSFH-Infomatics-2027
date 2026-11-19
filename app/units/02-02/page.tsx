@@ -2,14 +2,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import thinkingMascot from '@/public/mascots/student-thinking.png';
-import understoodMascot from '@/public/mascots/student-understood.png';
 import { SamplingLab } from './components/SamplingLab';
 import { ImageLab } from './components/ImageLab';
 import { MotionLab } from './components/MotionLab';
 import { DataSizeLab } from './components/DataSizeLab';
 import { RevisionLayout } from '@/app/components/revision2027/RevisionLayout';
-import { ReviewTerms } from '@/app/components/revision2027/ImportantTerms';
-import { learningSections, importantTerms } from './importantTerms';
+import { learningSections } from './importantTerms';
 import '@/app/components/revision2027/tokens.css';
 import '@/app/components/revision2027/layout.css';
 import './revision.css';
@@ -25,14 +23,16 @@ export const metadata: Metadata = {
 export default function DigitalizationUnit() {
   return (
     <main className="digital-unit">
-      <RevisionLayout reviewHref="#checkpoint-02-02" header={<header className="site-header unit-header">
+      <RevisionLayout header={<header className="site-header unit-header">
         <Link className="brand" href="/"><span className="brand-mark" aria-hidden="true">01</span><span>理数情報ラボ</span></Link>
         <span className="lesson-progress">02-02 · 情報のデジタル化 · 教科書 pp.57–61</span>
       </header>} navigation={
         <nav className="lesson-nav" aria-label="単元内メニュー">
           <Link href="/">← 単元一覧</Link>
           <p>情報のデジタル化<br /><small>教科書 pp.57–61</small></p>
-          <ol><li><a href="#sampling">1　波をデータに</a></li><li><a href="#images">2　画像のしくみ</a></li><li><a href="#motion">3　動画と立体</a></li><li><a href="#data-size">4　データ量</a></li><li><a href="#checkpoint-02-02">✓　まとめ・確認</a></li></ol>
+          <ol>
+            {learningSections.map(section => <li key={section.id}><a href={`#${section.id}`}>{section.number}　{section.label}</a></li>)}
+          </ol>
           <div className="nav-note"><b>このサイトは</b><span>入力を送信・保存しません。数値を何度変えても記録は残りません。</span></div>
         </nav>}>
           <section className="lesson-intro digit-intro">
@@ -47,11 +47,6 @@ export default function DigitalizationUnit() {
           <ImageLab />
           <MotionLab />
           <DataSizeLab />
-          <section className="learning-section checkpoint" id="checkpoint-02-02">
-            <div className="section-kicker"><span>✓</span><p>まとめ・確認</p></div>
-            <ReviewTerms sections={learningSections} terms={importantTerms} />
-            <div className="final-challenge digit-final"><Image src={understoodMascot} alt="理解して手を挙げる生徒のマスコット" /><div><p className="step-label">最後の問い</p><h3>元の情報に近づけると、なぜデータ量が増える？</h3><ol><li>1秒間に取り出す標本点の数</li><li>1つの値を表す量子化ビット数</li><li>画像の画素数や動画のフレーム数</li></ol><p>この3つを使って60秒で説明できたら、今日のミッション達成です。</p></div></div>
-          </section>
           <footer className="lesson-footer"><div><b>理数情報ラボ</b><span>高校 情報Ⅰ · Web教材</span></div><p>プリントと教科書の学習順序に合わせ、図解と操作画面は本教材用に独自作成しています。</p><div><Link href="/third-party-notices.txt">第三者ライセンス</Link><Link href="/">単元一覧へ戻る ↑</Link></div></footer>
       </RevisionLayout>
     </main>
