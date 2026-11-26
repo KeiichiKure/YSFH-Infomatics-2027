@@ -27,9 +27,8 @@
 .information-design-unit .u27-content .lesson-footer { margin-top: 40px; }
 .information-design-unit .u27-content .id-frame .id-choice { gap: 6px; }
 .information-design-unit .u27-content .id-quiz-columns .id-feedback { min-height: 105px; padding: 8px 10px; }
-.information-design-unit .u27-content .id-frame .id-step-position { font-size: var(--u27-control); }
-.information-design-unit .u27-content .id-evidence > .id-tabs { margin-bottom: 8px; }
-.information-design-unit .u27-content .id-carb-explanation { margin: 0; padding: 0; border: 0; }
+.information-design-unit .u27-content .id-evidence-example { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+.information-design-unit .u27-content .id-carb-explanation { display: grid; gap: 18px; margin: 0; padding: 0; border: 0; }
 .information-design-unit .u27-content .id-carb-explanation :is(.id-rice-sample-ad,.id-rice-takeaway,.id-rice-cases) { margin: 0; }
 .information-design-unit .u27-content .id-rice-cases > section { padding: 10px 14px; }
 .information-design-unit .u27-content .id-rice-cases h4 { min-height: 0; }
@@ -38,6 +37,11 @@
 .information-design-unit .u27-content .id-rice-worked-calculation h4 { margin: 0; }
 .information-design-unit .u27-content .id-cup-grid { gap: 10px; }
 .information-design-unit .u27-content .id-cup-card { padding: 8px 12px; }
+.information-design-unit .u27-content .id-cup-card h5 { font-size: var(--u27-body); margin: 0 0 10px; }
+.information-design-unit .u27-content :is(.id-cup-comparison,.id-action-signifier) { margin-top: 8px; }
+.information-design-unit .u27-content .id-cup-comparison > h4 { margin-bottom: 8px; }
+.information-design-unit .u27-content .id-action-signifier { border-top: 1px solid var(--line); padding-top: 14px; }
+.information-design-unit .u27-content .id-action-signifier > h4 { margin-bottom: 10px; }
 .information-design-unit .u27-content :is(.id-cup-card p,.id-cup-takeaway p) { font-size: var(--u27-body); line-height: 1.55; }
 .information-design-unit .u27-content .id-cup-card figcaption { gap: 4px 8px; margin: 6px 0; }
 .information-design-unit .u27-content .id-cup-card p { margin-top: 6px; }

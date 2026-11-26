@@ -26,11 +26,11 @@ button, .tabs button { font-size: 16px; min-height: 44px; }
 .poll-activity :is(.scene p, .scene-facts, .scene-facts b, .panel p, .reason-card, .own-reason p) { font-size: 18px; line-height: 1.5; }
 .poll-activity .tabs { margin-block: 6px 8px; }
 .poll-activity :is(.activity-heading,.toolbar) { margin-bottom: 6px; }
-.result-steps { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; }
-.result-steps > span { font-size: 16px; font-weight: 700; }
-.poll-activity .reasons { margin: 0; }
-.poll-activity .reasons .choices { margin-top: 8px; }
-.poll-activity .reason-list { display: grid; gap: 8px; margin-block: 8px; }
+.poll-activity > .actions { margin-top: 8px; }
+.poll-result-details { display: grid; gap: 14px; margin-top: 14px; padding-top: 14px; border-top: 1px solid #b8d0c3; }
+.poll-result-details .reasons { margin: 0; }
+.poll-result-details .reason-grid { align-items: start; }
+.reason-more summary { padding: 8px 0; cursor: pointer; font-size: 16px; }
 .poll-activity :is(.reason-card,.own-reason p) { white-space: normal; overflow-wrap: anywhere; }
 .poll-activity :is(.question,.own-reason) { margin-top: 0; }
 .poll-activity .scene > p + p { margin-top: 6px; }
@@ -39,8 +39,6 @@ button, .tabs button { font-size: 16px; min-height: 44px; }
 .poll-status-line .counter { margin-left: auto; }
 @media (min-width: 920px) {
   .poll-activity .activity-heading h2 { margin-right: auto; }
-  .poll-activity .reasons .choices { grid-template-columns: repeat(4,minmax(0,1fr)); }
-  .poll-activity .reason-list { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .poll-activity > .message { margin-top: 6px; }
 }
 </style></head><body><main id="poll-app"></main><script>window.POLL_EMBED = <?!= embed ?>;</script><script>/* Shared lesson content; copied into the Apps Script package by the packaging script. */
@@ -64,10 +62,7 @@ if (typeof module !== 'undefined') module.exports = globalThis.PollContent;
   let mode='all', code='', sessionId='', auth='', snap=null, selectedTopic=0, selectedRound=1, roundView=1, resultsOnly=false;
   let choice=null, draft='', pending=null, editing=true, busy=false, connecting=false, failed=false, status='', timer, refreshing=false, epoch=0, showAll=false, readFailures=0, lastRefresh=0;
   const topics=new Map(), earlyDrafts=new Map();
-  const resultSteps=['票数を比べる','みんなの理由を読む','良さと課題を整理する','自分の理由を読み返す'];
-  let resultStep=0, reasonChoice=0, reasonPage=0;
-  function resetResults(){resultStep=reasonChoice=reasonPage=0;}
-  function showResultStep(step){resultStep=step;render();document.getElementById('poll-result-step')?.focus({preventScroll:true});align();}
+  const expandedReasons=new Set();
   function storageGet(k){try{return localStorage.getItem(k);}catch{return null;}}
   function storageSet(k,v){try{localStorage.setItem(k,v);}catch{/* Keep working in memory. */}}
   const participant=storageGet('cm-poll-2027-browser-v1')||crypto.randomUUID();storageSet('cm-poll-2027-browser-v1',participant);
@@ -96,14 +91,14 @@ if (typeof module !== 'undefined') module.exports = globalThis.PollContent;
   function draftKey(topic=selectedTopic,round=selectedRound){return 'cm-poll-2027-draft:'+sessionId+':'+topic+':base:'+round;}
   function ownVote(s=snap,round=selectedRound){return s&&(round===2?s.mine.second:s.mine.first);}
   function saveDraft(){if(!snap||resultsOnly)return;const d={choice,reason:draft,pending};if(connecting)earlyDrafts.set(selectedTopic+':'+selectedRound,d);else storageSet(draftKey(),JSON.stringify(d));}
-  function loadDraft(){if(resultsOnly){choice=null;draft='';pending=null;editing=false;resetResults();return;}choice=null;draft='';pending=null;const own=ownVote();editing=!own;if(own){choice=own.choice;draft=own.reason;}const raw=storageGet(draftKey());if(raw)try{const d=JSON.parse(raw);choice=d.choice;draft=d.reason||'';pending=d.pending||null;if(pending)editing=true;}catch{/* Ignore malformed draft. */}const early=earlyDrafts.get(selectedTopic+':'+selectedRound);if(early&&(early.choice!==null||early.reason)){choice=early.choice;draft=early.reason;editing=true;}resetResults();}
+  function loadDraft(){if(resultsOnly){choice=null;draft='';pending=null;editing=false;expandedReasons.clear();return;}choice=null;draft='';pending=null;const own=ownVote();editing=!own;if(own){choice=own.choice;draft=own.reason;}const raw=storageGet(draftKey());if(raw)try{const d=JSON.parse(raw);choice=d.choice;draft=d.reason||'';pending=d.pending||null;if(pending)editing=true;}catch{/* Ignore malformed draft. */}const early=earlyDrafts.get(selectedTopic+':'+selectedRound);if(early&&(early.choice!==null||early.reason)){choice=early.choice;draft=early.reason;editing=true;}expandedReasons.clear();}
   function placeholder(topic){return {session:{id:sessionId||'connecting',title:mode==='all'?'全クラスの蓄積':'授業コード '+code,topic,condition:'base',phase:'initial'},now:null,visible:false,mine:{first:null,second:null},first:null,second:null};}
   function forRound(base){return {...base,session:{...base.session,phase:selectedRound===2?'reconsider':'initial'}};}
   function ingest(next){const list=next.topics||[next];list.forEach(s=>topics.set(s.session.topic,s));const {topics:unused,...active}=next;topics.set(active.session.topic,active);}
   function accept(next,fromVote=false){
     const before=snap;ingest(next);snap=forRound(topics.get(selectedTopic)||placeholder(selectedTopic));
     const time=document.getElementById('poll-updated');if(time)time.textContent='最終確認：'+new Date(snap.now).toLocaleTimeString('ja-JP');
-    if(fromVote){resetResults();pending=null;busy=false;editing=false;failed=false;status='✓ 投票を保存しました。';saveDraft();render();return;}
+    if(fromVote){expandedReasons.clear();pending=null;busy=false;editing=false;failed=false;status='✓ 投票を保存しました。';saveDraft();render();return;}
     // Never replace a focused textarea or controls while the student is drafting.
     if(editing)return;
     if(JSON.stringify({...before,now:null})!==JSON.stringify({...snap,now:null})){status='';failed=false;render();}
@@ -153,14 +148,23 @@ if (typeof module !== 'undefined') module.exports = globalThis.PollContent;
     app.replaceChildren(el('div',{class:'join poll-activity'},el('h2',{},'こんな場面では、あなたはどうしますか？'),el('p',{},'方法を選んで投票したら、みんなの結果と理由を比べられます。'),button('コードなしで、全体投票に参加する',()=>start('all'),{class:'primary'}),button('投票せずに結果を見る',()=>start('all','',true)),el('p',{class:'hint'},'どちらの参加方法でも、課題1〜4と考え直しを自由に選べます。'),entry,el('p',{class:'privacy'},googleMode?'Googleに方法と任意の理由を保存し、匿名で共有します。名前や実際の個人の事情は書かないでください。':'確認用サーバーへ保存します。Googleには送信しません。'),el('p',{class:'message'+(failed?' error':''),role:'status'},status||'全体投票はコード不要です。自分のクラスの結果を比べる場合は先生の4桁コードを使います。')));resize();
   }
   function reasons(view){
-    const lists=C.choices.map((_,i)=>view.reasons.filter(r=>r.choice===i));
-    const current=lists[reasonChoice],pages=Math.max(1,Math.ceil(current.length/2));
-    reasonPage=Math.min(reasonPage,pages-1);
+    const groups=C.choices.map((label,i)=>{
+      const list=view.reasons.filter(r=>r.choice===i);
+      const card=r=>el('p',{class:'reason-card'},r.reason);
+      const group=el('section',{class:'reason-group'},el('h4',{},label+' · 理由 '+list.length+'件'),
+        list.length ? list.slice(0,2).map(card) : el('p',{class:'empty'},'共有されている理由は、まだありません。'));
+      if(list.length>2){
+        const extra=el('details',{class:'reason-more',ontoggle:e=>{
+          if(e.currentTarget.isConnected){if(e.currentTarget.open)expandedReasons.add(i);else expandedReasons.delete(i);}
+        }},el('summary',{},'残りの理由 '+(list.length-2)+'件を読む'),list.slice(2).map(card));
+        extra.open=expandedReasons.has(i);
+        group.append(extra);
+      }
+      return group;
+    });
     return el('section',{class:'reasons'},el('h3',{},'この方法を選んだ理由'),
       el('p',{},'理由は任意です。書かれている意見を比べよう。人数の多さは正しさを決めません。'),
-      el('div',{class:'choices','aria-label':'理由を見る方法'},C.choices.map((label,i)=>button(label+' · '+lists[i].length+'件',()=>{reasonChoice=i;reasonPage=0;render();document.querySelectorAll('.reasons .choices button')[i]?.focus();},{'aria-pressed':reasonChoice===i}))),
-      current.length ? el('div',{class:'reason-list'},current.slice(reasonPage*2,reasonPage*2+2).map(r=>el('p',{class:'reason-card'},r.reason))) : el('p',{class:'empty'},'共有されている理由は、まだありません。'),
-      pages>1 ? el('div',{class:'rounds'},button('← 前の理由',()=>{reasonPage--;render();document.getElementById('poll-reason-page')?.focus();},{disabled:reasonPage===0}),el('span',{id:'poll-reason-page',tabindex:'-1'},(reasonPage+1)+' / '+pages),button('次の理由 →',()=>{reasonPage++;render();document.getElementById('poll-reason-page')?.focus();},{disabled:reasonPage===pages-1})) : null);
+      el('div',{class:'reason-grid'},groups));
   }
   function organize(t){
     return el('div',{class:'layout'},el('section',{class:'scene'},el('h3',{},'伝え方の良さと課題を整理する'),t.points.map(p=>el('p',{},p)),
@@ -176,22 +180,18 @@ if (typeof module !== 'undefined') module.exports = globalThis.PollContent;
       const textarea=el('textarea',{id:'vote-reason',rows:'3',maxlength:'400',value:draft,disabled:busy||Boolean(pending),placeholder:'任意・200字以内。良いところと気になるところを書いてもOK。',oninput:e=>{draft=e.target.value;saveDraft();document.getElementById('send-vote').disabled=busy||connecting||!auth||choice===null||[...draft.trim()].length>200;document.getElementById('reason-count').textContent=[...draft.trim()].length+' / 200字';}});
       add(el('h3',{},selectedRound===2?'考え直した方法を選ぼう':'あなたなら、どう伝える？'),el('div',{class:'choices'},C.choices.map((label,i)=>button(label,()=>{choice=i;saveDraft();render();},{'aria-pressed':choice===i,disabled:busy||Boolean(pending)}))),el('label',{class:'reason-label',for:'vote-reason'},'なぜ選んだ？ 良いところと気になるところ（任意）'),textarea,el('div',{class:'actions'},button(connecting?'接続を準備中…':pending?'保存を再確認する':own?'投票を修正する':selectedRound===2?'考え直しを投票する':'この方法に投票する',send,{id:'send-vote',class:'primary',disabled:busy||connecting||!auth||choice===null||[...draft.trim()].length>200}),own&&!pending?button('結果へ戻る',()=>{editing=false;render();refresh();}):null,selectedRound===2&&!own?button('初回の結果へ戻る',()=>selectTopic(selectedTopic,1)):null,el('span',{id:'reason-count',class:'counter'},[...draft.trim()].length+' / 200字')),el('p',{class:'privacy'},googleMode?'方法と任意の理由をGoogleへ匿名で保存します。':'確認用サーバーへ保存します。Googleには送信しません。'));
     }else if(snap.visible&&view){
-      add(el('div',{class:'rounds'},button('初回の結果',()=>{roundView=1;reasonPage=0;render();},{'aria-pressed':roundView===1}),button('考え直しの結果',()=>{roundView=2;reasonPage=0;render();},{'aria-pressed':roundView===2}),mode==='class'?button('全投票結果を見る '+(showAll?'ON':'OFF'),()=>{showAll=!showAll;resetResults();render();},{'aria-label':'全投票結果を見る','aria-pressed':showAll,disabled:!snap.all}):null),el('div',{class:'totals'},el('h3',{},mode==='all'||showAll?'全クラスの投票':'この授業の投票'),el('strong',{'data-testid':'vote-total'},view.total+'票')),el('div',{class:'bars'},C.choices.map((label,i)=>{const pc=view.total?Math.round(view.counts[i]/view.total*100):0;return el('div',{class:'barrow'},el('b',{},label),el('div',{class:'bartrack'},el('span',{style:'width:'+pc+'%'})),el('strong',{},view.counts[i]+'票 · '+pc+'%'));})),viewOwn?el('div',{class:'own'},'自分の投票：'+C.choices[viewOwn.choice]):null);
+      add(el('div',{class:'rounds'},button('初回の結果',()=>{roundView=1;expandedReasons.clear();render();},{'aria-pressed':roundView===1}),button('考え直しの結果',()=>{roundView=2;expandedReasons.clear();render();},{'aria-pressed':roundView===2}),mode==='class'?button('全投票結果を見る '+(showAll?'ON':'OFF'),()=>{showAll=!showAll;expandedReasons.clear();render();},{'aria-label':'全投票結果を見る','aria-pressed':showAll,disabled:!snap.all}):null),el('div',{class:'totals'},el('h3',{},mode==='all'||showAll?'全クラスの投票':'この授業の投票'),el('strong',{'data-testid':'vote-total'},view.total+'票')),el('div',{class:'bars'},C.choices.map((label,i)=>{const pc=view.total?Math.round(view.counts[i]/view.total*100):0;return el('div',{class:'barrow'},el('b',{},label),el('div',{class:'bartrack'},el('span',{style:'width:'+pc+'%'})),el('strong',{},view.counts[i]+'票 · '+pc+'%'));})),viewOwn?el('div',{class:'own'},'自分の投票：'+C.choices[viewOwn.choice]):null);
     }
     const hasResult=snap.visible&&view&&!showForm;
-    const stepCount=viewOwn ? resultSteps.length : resultSteps.length-1;
-    resultStep=Math.min(resultStep,stepCount-1);
-    const activity=hasResult&&resultStep===1 ? reasons(view) : hasResult&&resultStep===2 ? organize(t) : hasResult&&resultStep===3 && viewOwn
-      ? el('section',{class:'scene own-reason'},el('h3',{},'自分の理由'),el('p',{},viewOwn.reason||'理由は未記入（任意）'))
-      : el('div',{class:'layout','data-testid':'activity-main'},scene,panel);
-    const resultNavigation=hasResult ? el('nav',{class:'result-steps','aria-label':'結果の手順'},
-      button('← 戻る',()=>showResultStep(resultStep-1),{disabled:resultStep===0}),
-      button('次へ →',()=>showResultStep(resultStep+1),{disabled:resultStep===stepCount-1}),
-      el('span',{id:'poll-result-step',tabindex:'-1',role:'status'},(resultStep+1)+' / '+stepCount+'　'+resultSteps[resultStep]),
-      resultStep===0&&!resultsOnly ? button('もう一度投票する（考え直し）',()=>selectTopic(selectedTopic,2,true),{class:'primary'}) : null,
-      resultStep===0&&viewOwn ? button('この回の自分の投票を修正する',()=>selectTopic(selectedTopic,roundView,true)) : null) : null;
+    const resultActions=hasResult&&!resultsOnly ? el('div',{class:'actions'},
+      button('もう一度投票する（考え直し）',()=>selectTopic(selectedTopic,2,true),{class:'primary'}),
+      viewOwn ? button('この回の自分の投票を修正する',()=>selectTopic(selectedTopic,roundView,true)) : null) : null;
+    const activity=el('div',{class:'layout','data-testid':'activity-main'},scene,panel);
+    const resultDetails=hasResult ? el('div',{class:'poll-result-details'},
+      reasons(view),organize(t),
+      viewOwn ? el('section',{class:'own-reason'},el('h3',{},'自分の理由'),el('p',{},viewOwn.reason||'理由は未記入（任意）')) : null) : null;
     const message=status||(showForm?'方法の選択は必須、理由は任意です。結果は投票後に見られます。':'約10〜16秒おきに自動更新します。「最新の結果に更新」でも確認できます。');
-    app.replaceChildren(el('section',{class:'poll-activity'},heading(s.title+' · '+(resultsOnly?'結果のみ閲覧':selectedRound===2?'考え直し':'初回')),el('nav',{class:'tabs','aria-label':'4つの課題'},C.topics.map((topic,i)=>button((i+1)+' '+topic.title,()=>selectTopic(i),{'aria-pressed':i===selectedTopic,disabled:busy||Boolean(pending)}))),activity,resultNavigation,el('div',{class:'poll-status-line'},el('p',{class:'message'+(failed?' error':''),id:'poll-status',role:'status','aria-live':'polite'},message),el('p',{class:'counter',id:'poll-updated'},snap.now?'最終確認：'+new Date(snap.now).toLocaleTimeString('ja-JP'):connecting?'課題はすぐに読めます。接続後に投票を保存できます。':'')),!auth&&!connecting?button('接続を再確認する',()=>start(mode,code,resultsOnly)):null));
+    app.replaceChildren(el('section',{class:'poll-activity'},heading(s.title+' · '+(resultsOnly?'結果のみ閲覧':selectedRound===2?'考え直し':'初回')),el('nav',{class:'tabs','aria-label':'4つの課題'},C.topics.map((topic,i)=>button((i+1)+' '+topic.title,()=>selectTopic(i),{'aria-pressed':i===selectedTopic,disabled:busy||Boolean(pending)}))),activity,resultActions,el('div',{class:'poll-status-line'},el('p',{class:'message'+(failed?' error':''),id:'poll-status',role:'status','aria-live':'polite'},message),el('p',{class:'counter',id:'poll-updated'},snap.now?'最終確認：'+new Date(snap.now).toLocaleTimeString('ja-JP'):connecting?'課題はすぐに読めます。接続後に投票を保存できます。':'')),!auth&&!connecting?button('接続を再確認する',()=>start(mode,code,resultsOnly)):null,resultDetails));
     resize();
   }
   document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!editing&&!connecting){clearTimeout(timer);timer=setTimeout(refresh,Math.random()*5000);}});

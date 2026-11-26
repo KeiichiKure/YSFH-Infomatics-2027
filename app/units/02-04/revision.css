@@ -109,6 +109,23 @@
   border-radius: 10px;
   background: #f7faf8;
 }
+.communication-unit .u27-content #visibility-lab .cm-visibility-result {
+  border-top: 1px solid var(--line);
+  margin-top: 8px;
+  padding-top: 14px;
+}
+.communication-unit .u27-content #visibility-lab .cm-visibility-result > h4 {
+  font-size: var(--u27-heading);
+  margin-bottom: 10px;
+}
+.communication-unit .u27-content #visibility-lab .cm-visibility-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-bottom: 8px;
+}
+.communication-unit .u27-content #visibility-lab .cm-visibility-notes > p { font-size: var(--u27-body); }
 .communication-unit .u27-content #visibility-lab .cm-viewers button { min-height: 44px; }
 .communication-unit .u27-content #visibility-lab :is(.cm-feedback p,.cm-recipient-reaction p) {
   font-size: var(--u27-body);

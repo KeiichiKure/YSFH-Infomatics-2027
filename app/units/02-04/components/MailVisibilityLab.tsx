@@ -7,7 +7,6 @@ import './mail-refinement.css';
 const roles: { value: MailRole; label: string }[] = [{ value: 'TO', label: 'TO' }, { value: 'CC', label: 'CC' }, { value: 'BCC', label: 'BCC' }, { value: 'NONE', label: '送らない' }];
 export function MailVisibilityLab({ basePath }: { basePath: string }) {
   const [assignment, setAssignment] = useState<Assignment>({ ...initialAssignment }), [mail, setMail] = useState<SentMail | null>(null), [viewer, setViewer] = useState<PersonId>('B');
-  const [step, setStep] = useState<'setup' | 'received'>('setup');
   const received = mail ? receivedMail(mail, viewer) : null, privacy = mail ? privacyResult(mail.assignment) : null;
   const configure = (next: Assignment) => { setAssignment(next); setMail(current => current ? sendMail(next) : null); };
   const thought = mail ? recipientReaction(mail, viewer) : null;
@@ -15,15 +14,9 @@ export function MailVisibilityLab({ basePath }: { basePath: string }) {
   const privacyFeedback = <Feedback state={privacy ? privacy.good ? 'good' : 'bad' : 'waiting'}>{privacy ? <><b>{privacy.good ? '✓ E・Fへの条件に合う設定' : '⚠ E・Fの宛先を見直そう'}</b><p>{privacy.text}</p></> : <><b>まず模擬送信しよう。</b><p>Aは自分にも送り、受信側の表示と控えを確認します。</p></>}</Feedback>;
   const addressList = (list: string[]) => list.length ? list.map((address, i) => <span key={address}>{i > 0 && '、'}<span className={address === addressOf(viewer) ? 'cm-viewer-address' : undefined}>{address}</span></span>) : '（表示なし）';
   return <Section number={6} question="同じメールが届いても、すべての受信者のアドレスが見えるとは限らない。誰に何が見える？">
-    <Frame id="visibility-lab" title="Aさんのメールを、B〜Fさんで見る" controls={<>
-      {step === 'setup' ? <button className="cm-primary" onClick={() => { setMail(sendMail(assignment)); setStep('received'); }}>模擬送信する</button>
-        : <button onClick={() => setStep('setup')}>← 宛先の設定に戻る</button>}
-      {step === 'setup' && mail && <button onClick={() => setStep('received')}>受信画面へ →</button>}
-      <span className="cm-counter">{mail ? `${mail.recipients.length}人に配送` : '未送信'}</span>
-      <button onClick={() => { setAssignment({ ...initialAssignment }); setMail(null); setViewer('B'); setStep('setup'); }}>プリントの設定へ戻す</button>
-    </>}>
+    <Frame id="visibility-lab" title="Aさんのメールを、B〜Fさんで見る">
       <p className="cm-task"><b>条件：</b>地域の協力者E・Fさんにも案内。二人はアドレスの共有に同意していません。</p>
-      {step === 'setup' && <div className="cm-split cm-visibility-split">
+      <div className="cm-split cm-visibility-split">
         <div className="cm-config">
           <div className="cm-config-heading"><h4>送信者Aさんの設定</h4><p className="cm-from">FROM：a@example.com</p></div>
           <div className="cm-role-table">{personIds.map(id => <fieldset key={id} className={viewer === id ? 'cm-viewer-setting' : undefined}>
@@ -31,31 +24,36 @@ export function MailVisibilityLab({ basePath }: { basePath: string }) {
             <div role="group" aria-label={`${id}さんの宛先`}>{roles.map(r => <button key={r.value} className={viewer === id && assignment[id] === r.value ? 'cm-viewer-role' : undefined} aria-pressed={assignment[id] === r.value} onClick={() => configure({ ...assignment, [id]: r.value })}>{r.label}</button>)}</div>
           </fieldset>)}</div>
           <div className="cm-presets"><button onClick={() => configure({ ...initialAssignment })}>プリントの設定</button><button onClick={() => configure({ ...initialAssignment, E: 'CC', F: 'CC' })}>E・FをCCへ</button></div>
-
         </div>
         <div className="cm-visibility-notes">
-          <h4>1 / 2　宛先を設定する</h4>
+          <div className="cm-visibility-actions">
+            <button type="button" className="cm-primary" onClick={() => setMail(sendMail(assignment))}>模擬送信する</button>
+            <span role="status">{mail ? `${mail.recipients.length}人に配送` : '未送信'}</span>
+            <button type="button" onClick={() => { setAssignment({ ...initialAssignment }); setMail(null); setViewer('B'); }}>プリントの設定へ戻す</button>
+          </div>
           {privacyFeedback}
         </div>
-      </div>}
-      {step === 'received' && <div className="cm-split cm-visibility-split">
-        <div className="cm-received">
-          <h4>誰の受信画面を見る？</h4>
-          <div className="cm-tabs cm-viewers" aria-label="受信者を選ぶ">{personIds.map(id => <button key={id} aria-pressed={viewer === id} onClick={() => setViewer(id)}>{id}さん</button>)}</div>
-          <div className="cm-mail cm-received-mail">
-            <h4>{viewer}さん（{personRoles[viewer]}）の受信画面</h4>
-            {received?.delivered ? <>
-              <dl><div><dt>FROM</dt><dd>{received.from}</dd></div><div className={viewRole === 'TO' ? 'cm-viewer-header' : undefined}><dt>TO</dt><dd>{addressList(received.to)}</dd></div><div className={viewRole === 'CC' ? 'cm-viewer-header' : undefined}><dt>CC</dt><dd>{addressList(received.cc)}</dd></div><div><dt>件名</dt><dd>{received.subject}</dd></div></dl>
-              <p className="cm-mail-body">{received.body}</p>
-            </> : <div className="cm-inbox-wait"><span aria-hidden="true">✉</span><b>{mail ? 'このメールは届いていません' : 'まだ送信されていません'}</b><p>{mail ? `${viewer}さんは「送らない」に指定されています。` : `${viewer}さんの指定は「${viewRole === 'NONE' ? '送らない' : viewRole}」。模擬送信して、受信画面を確かめよう。`}</p></div>}
+      </div>
+      <section className="cm-visibility-result" aria-labelledby="cm-visibility-result-title">
+        <h4 id="cm-visibility-result-title">受信画面を確かめる</h4>
+        <div className="cm-split cm-visibility-split">
+          <div className="cm-received">
+            <h4>誰の受信画面を見る？</h4>
+            <div className="cm-tabs cm-viewers" aria-label="受信者を選ぶ">{personIds.map(id => <button key={id} aria-pressed={viewer === id} onClick={() => setViewer(id)}>{id}さん</button>)}</div>
+            <div className="cm-mail cm-received-mail">
+              <h4>{viewer}さん（{personRoles[viewer]}）の受信画面</h4>
+              {received?.delivered ? <>
+                <dl><div><dt>FROM</dt><dd>{received.from}</dd></div><div className={viewRole === 'TO' ? 'cm-viewer-header' : undefined}><dt>TO</dt><dd>{addressList(received.to)}</dd></div><div className={viewRole === 'CC' ? 'cm-viewer-header' : undefined}><dt>CC</dt><dd>{addressList(received.cc)}</dd></div><div><dt>件名</dt><dd>{received.subject}</dd></div></dl>
+                <p className="cm-mail-body">{received.body}</p>
+              </> : <div className="cm-inbox-wait"><span aria-hidden="true">✉</span><b>{mail ? 'このメールは届いていません' : 'まだ送信されていません'}</b><p>{mail ? `${viewer}さんは「送らない」に指定されています。` : `${viewer}さんの指定は「${viewRole === 'NONE' ? '送らない' : viewRole}」。模擬送信して、受信画面を確かめよう。`}</p></div>}
+            </div>
+          </div>
+          <div className="cm-visibility-notes"><h4>受信者の受け止め</h4>
+            {!thought && <p>模擬送信後に、選んだ受信者から見た宛先設定の良さや注意点を表示します。</p>}
+            {thought && <div className={`cm-recipient-reaction ${thought.warning ? 'is-warning' : ''}`} role="status" aria-live="polite"><h4>{viewer}さんの受け止め{thought.warning && '・この設定で困ること'}</h4><strong>{thought.warning ? '⚠ ' : '✓ '}{thought.main}</strong><p>{thought.detail}</p></div>}
           </div>
         </div>
-        <div className="cm-visibility-notes">
-          <h4>2 / 2　受信画面を確かめる</h4>
-          {privacyFeedback}
-          {thought && <div className={`cm-recipient-reaction ${thought.warning ? 'is-warning' : ''}`} role="status" aria-live="polite"><h4>{viewer}さんの受け止め{thought.warning && '・この設定で困ること'}</h4><strong>{thought.warning ? '⚠ ' : '✓ '}{thought.main}</strong><p>{thought.detail}</p></div>}
-        </div>
-      </div>}
+      </section>
     </Frame>
     <p className="cm-summary"><b>届く人と、アドレスが見える人は別。</b>TOは主な相手、CCは共有用、BCCは他の受信者へアドレスを知らせずに送る相手です。</p>
     <Note title="FROMとメールアドレスの補足"><p><b>FROM</b>は差出人。今回はa@example.comで、Aさんが送信者です。<b>メールアドレスはユーザ名＠ドメイン名</b>の形で、aがユーザ名、example.comがドメイン名です。</p><p><a href={basePath + '/units/05-02/#names'}>既習のドメイン名・メールアドレスを確認する →</a></p></Note>

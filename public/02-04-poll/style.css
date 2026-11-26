@@ -26,11 +26,11 @@ button, .tabs button { font-size: 16px; min-height: 44px; }
 .poll-activity :is(.scene p, .scene-facts, .scene-facts b, .panel p, .reason-card, .own-reason p) { font-size: 18px; line-height: 1.5; }
 .poll-activity .tabs { margin-block: 6px 8px; }
 .poll-activity :is(.activity-heading,.toolbar) { margin-bottom: 6px; }
-.result-steps { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; }
-.result-steps > span { font-size: 16px; font-weight: 700; }
-.poll-activity .reasons { margin: 0; }
-.poll-activity .reasons .choices { margin-top: 8px; }
-.poll-activity .reason-list { display: grid; gap: 8px; margin-block: 8px; }
+.poll-activity > .actions { margin-top: 8px; }
+.poll-result-details { display: grid; gap: 14px; margin-top: 14px; padding-top: 14px; border-top: 1px solid #b8d0c3; }
+.poll-result-details .reasons { margin: 0; }
+.poll-result-details .reason-grid { align-items: start; }
+.reason-more summary { padding: 8px 0; cursor: pointer; font-size: 16px; }
 .poll-activity :is(.reason-card,.own-reason p) { white-space: normal; overflow-wrap: anywhere; }
 .poll-activity :is(.question,.own-reason) { margin-top: 0; }
 .poll-activity .scene > p + p { margin-top: 6px; }
@@ -39,7 +39,5 @@ button, .tabs button { font-size: 16px; min-height: 44px; }
 .poll-status-line .counter { margin-left: auto; }
 @media (min-width: 920px) {
   .poll-activity .activity-heading h2 { margin-right: auto; }
-  .poll-activity .reasons .choices { grid-template-columns: repeat(4,minmax(0,1fr)); }
-  .poll-activity .reason-list { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .poll-activity > .message { margin-top: 6px; }
 }
