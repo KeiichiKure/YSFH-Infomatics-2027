@@ -1,0 +1,406 @@
+.compression-unit .brand { font-size: 19px; }
+.compression-unit .lesson-progress { font-size: 15px; }
+.compression-unit .lesson-nav > p { display: block; margin: 18px 0 12px; }
+.compression-unit .lesson-nav ol { display: grid; gap: 4px; }
+.compression-unit .lesson-nav li { margin: 0; padding: 0; }
+.compression-unit .nav-note { margin-top: 20px; }
+.compression-unit .nav-note b { font-size: var(--u27-control); }
+.compression-unit .nav-note span { font-size: var(--u27-small); }
+
+.compression-unit .compression-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 24px 36px;
+  margin: 0;
+}
+.compression-unit .compression-intro-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.compression-unit .compression-intro-badges > span {
+  display: inline-flex;
+  margin: 0;
+  padding: 3px 9px;
+  border: 1px solid #b9d0ca;
+  border-radius: 8px;
+  background: #edf5f0;
+  color: var(--teal-dark);
+  font-size: var(--u27-small);
+  font-weight: 800;
+}
+.compression-unit .compression-intro h1 { font-size: clamp(36px, 4.1vw, 52px); line-height: 1.35; }
+.compression-unit .compression-intro-copy > p:last-child { margin: 16px 0 0; color: var(--muted); }
+.compression-unit .compression-intro-support { align-self: center; }
+.compression-unit .mission-box { margin: 0 0 14px; padding: 16px 18px; border-left-width: 5px; }
+.compression-unit .mission-box strong { font-size: var(--u27-body); }
+.compression-unit :is(.mission-box span, .eyebrow, .mascot-guide span, .learning-paths span, .learning-paths small) { font-size: var(--u27-small); }
+.compression-unit .mascot-guide { margin: 0; max-width: none; box-shadow: none; }
+.compression-unit .mascot-guide img { width: 76px; height: 76px; }
+.compression-unit .mascot-guide b { font-size: var(--u27-control); }
+.compression-unit .learning-paths { grid-column: 1 / -1; margin: 0; }
+.compression-unit .learning-paths a { min-height: 96px; }
+.compression-unit .learning-paths b { font-size: var(--u27-body); }
+
+.compression-unit .u27-content .learning-section { scroll-margin-top: 84px; }
+.compression-unit .section-kicker p,
+.compression-unit .u27-content .step-label { margin: 0; font-size: 15px; }
+.compression-unit .section-title-row { grid-template-columns: minmax(0, 1fr) minmax(240px, 300px); gap: 20px; margin-bottom: 20px; }
+.compression-unit .section-title-row h2 { font-size: var(--u27-section); line-height: 1.4; }
+.compression-unit .u27-content :is(.section-question, .teacher-note, .expand-result p, .audio-band p:not(.step-label),
+  .method-copy p, .step-card p, .decode-heading p, .lzw-rules p, .lzw-rule-card dl, .dictionary-answer p,
+  .assignment-footnote, .bitstream-legend, .data-caution, .video-scene-frame p, .format-observation p,
+  .format-feedback > b, .format-feedback > span, .image-quality-control small, .image-quality-control.is-static > span,
+  .format-inspector li, .rate-answer > small, .compression-input .input-error, .step-card > strong) {
+  font-size: var(--u27-body);
+  line-height: 1.6;
+}
+.compression-unit :is(.lab-heading h3, .rate-heading h3, .method-copy h4, .lzw-rules h4, .lzw-stage > h4,
+  .audio-band h3, .decode-heading h4) { font-size: var(--u27-heading); line-height: 1.4; }
+.compression-unit .u27-content :is(.compression-mode button, .codec-toggle button, .method-tabs button, .scenario-tabs button,
+  .step-buttons button, .huffman-phase-tabs button, .frame-step-buttons button, .image-lab-toolbar button,
+  .compression-input button, .phase-next, .rate-presets button, .format-question label span) {
+  min-height: 44px;
+  font-size: var(--u27-control);
+}
+.compression-unit .u27-content :is(.text-input span, .rate-bars label > span, .rate-bars output, .format-question legend,
+  .data-canister > span, .compression-arrow b, .codec-flow span, .codec-flow .codec-machine b, .image-lab-toolbar > div > span,
+  .image-setting-step, .image-quality-control > span, .frame-timeline label > span, .lz-readout,
+  .huffman-table > div > span, .huffman-table-head, .huffman-table code, .method-result span, .video-scene-frame > span,
+  .compression-size-result > div > :is(b,strong), .decode-dictionary em, .decode-dictionary i b,
+  .decode-candidates code, .dictionary-growth > div > span, .experience-label, .encoded-progress > span) {
+  font-size: var(--u27-control);
+}
+.compression-unit .u27-content :is(.compression-mode small, .data-canister > small, .compression-arrow small, .codec-flow small,
+  .rate-bars > small, .format-question > div :is(span,small), .compression-size-result small, .method-result small,
+  .decode-result small, .decode-dictionary small, .decode-candidates small, .huffman-table code small, .step-card > span,
+  .huffman-source-characters i small, .format-inspector :is(small,em), .difference-marker-key small, .huffman-summary span) {
+  font-size: var(--u27-small);
+}
+.compression-unit .u27-content :is(.rate-working, .codec-flow > div:not(.codec-machine) b, .compression-size-result code,
+  .method-result code, .format-inspector > div strong, .huffman-summary strong, .step-card code) { font-size: 22px; }
+.compression-unit .u27-content :is(.text-input input, .format-question > div strong) { font-size: var(--u27-body); }
+.compression-unit .u27-content .format-question label:has(input:focus-visible) span {
+  outline: 3px solid var(--teal-dark);
+  outline-offset: 2px;
+}
+.compression-unit .scenario-tabs { flex-wrap: wrap; overflow: visible; }
+.compression-unit .format-question fieldset > div { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.compression-unit .format-feedback { overflow-wrap: anywhere; }
+.compression-unit .audio-band { border: 1px solid var(--line); border-radius: 16px; background: white; }
+.compression-unit .audio-band h3 { margin: 3px 0; }
+.compression-unit .frequency-line .full-band { font-size: var(--u27-small); }
+.compression-unit .frequency-line .phone-band {
+  left: 12px;
+  right: 12px;
+  color: var(--ink);
+  background: none;
+  font-size: var(--u27-small);
+}
+.compression-unit .frequency-line .phone-band::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 4px;
+  background: var(--coral);
+}
+.compression-unit .frequency-line .phone-band::after {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 27%;
+  right: 38%;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--coral);
+}
+.compression-unit .frequency-line small { font-size: var(--u27-small); }
+.compression-unit .lesson-footer { margin-top: 56px; font-size: var(--u27-small); }
+.compression-unit .lesson-footer p { font-size: inherit; }
+
+.compression-unit :is(.compression-basics-panel, .compression-rate-lab, .codec-lab, .format-choice-lab,
+  .lossless-workbench, .keyframe-lab, .image-compression-lab) {
+  padding: 20px;
+  border-radius: 16px;
+  scroll-margin-top: 72px;
+}
+.compression-unit .lab-heading { margin: 0; }
+.compression-unit .lab-heading h3 { margin: 0; }
+.compression-unit .compression-mode { margin-top: 12px; }
+.compression-unit .compression-mode button { min-height: 0; padding: 8px 12px; }
+.compression-unit .compression-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 14px;
+  margin-top: 14px;
+}
+.compression-unit .compression-flow { grid-template-columns: minmax(0, 1fr) 78px minmax(0, 1fr); gap: 10px; margin: 0; }
+.compression-unit .data-canister { min-height: 0; align-self: stretch; padding: 12px; }
+.compression-unit .data-blocks { margin-top: 8px; }
+.compression-unit .data-blocks i { min-height: 34px; }
+.compression-unit .expand-result { margin: 0; padding: 12px; }
+.compression-unit .expand-result > div { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+
+.compression-unit .compression-rate-lab { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 12px; margin-top: 18px; }
+.compression-unit .compression-rate-lab > :is(.rate-heading,.rate-formula,.rate-presets) { grid-column: 1 / -1; }
+.compression-unit .rate-heading { min-width: 0; }
+.compression-unit .rate-formula { flex-wrap: wrap; white-space: normal; }
+.compression-unit :is(.rate-bars,.rate-answer) { grid-column: auto; min-width: 0; padding: 12px; }
+.compression-unit .rate-bars label { grid-template-columns: auto minmax(0, 1fr) auto; }
+.compression-unit .rate-answer { grid-template-columns: minmax(0, 1fr) auto; }
+
+.compression-unit .image-compression-lab {
+  display: grid;
+  grid-template-columns: minmax(280px, .9fr) minmax(0, 1.75fr);
+  align-items: start;
+  gap: 14px 18px;
+}
+.compression-unit .image-compression-lab > .lab-heading { grid-column: 1 / -1; }
+.compression-unit .image-lab-toolbar { grid-template-columns: minmax(0, 1fr); margin: 0; gap: 8px; }
+.compression-unit .image-lab-toolbar > div:first-child > div { display: grid; grid-template-columns: 1fr 1fr; }
+.compression-unit .image-lab-toolbar button { padding-inline: 5px; }
+.compression-unit .image-setting-area { margin-top: 10px; }
+.compression-unit .image-format-stage { grid-template-columns: minmax(0, 1.6fr) minmax(185px, 1fr); gap: 12px; margin: 0; }
+.compression-unit .image-canvas-frame { align-self: start; }
+.compression-unit .image-canvas-frame canvas { height: auto; }
+.compression-unit .format-inspector { min-height: 0; padding: 12px; }
+.compression-unit .format-inspector h4 { font-size: var(--u27-value); }
+.compression-unit .format-observation { margin-top: 12px; }
+
+.compression-unit .video-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr);
+  align-items: start;
+  gap: 16px;
+  margin-top: 12px;
+}
+.compression-unit .keyframe-compare { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: start; gap: 8px; margin: 0; }
+.compression-unit .keyframe-compare > i { align-self: center; }
+.compression-unit .video-workbench-notes .video-difference-legend { display: block; margin: 0; padding: 8px; }
+.compression-unit .video-workbench-notes .video-difference-legend > i { float: left; width: 18px; height: 18px; margin: 5px 7px 0 0; }
+.compression-unit .video-workbench-notes .teacher-note { margin: 6px 0 0; padding: 8px; }
+.compression-unit .u27-content .video-difference-legend p { font-size: var(--u27-body); line-height: 1.5; }
+.compression-unit .frame-timeline { margin-top: 10px; padding: 7px 10px; }
+
+.compression-unit .lossless-workbench {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) minmax(0, 1.35fr);
+  align-items: center;
+  gap: 6px 16px;
+  padding: 14px 18px;
+}
+.compression-unit .lossless-workbench > .lab-heading { gap: 8px; }
+.compression-unit .lossless-workbench .print-badge { padding: 4px 4px 4px 8px; }
+.compression-unit .lossless-workbench .print-badge b { min-height: 27px; height: auto; }
+.compression-unit .method-tabs { margin: 0; }
+.compression-unit .method-tabs button { padding-inline: 5px; }
+.compression-unit .lossless-workbench > .method-panel { grid-column: 1 / -1; }
+.compression-unit .method-panel { margin-top: 0; padding: 8px; }
+.compression-unit .compression-phases {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 4px;
+  border-radius: 10px;
+  background: #dfeae5;
+}
+.compression-unit .compression-phases button {
+  flex: 1 1 auto;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--u27-control);
+  font-weight: 800;
+  cursor: pointer;
+}
+.compression-unit .compression-phases button[aria-pressed='true'] { background: var(--teal-dark); color: white; }
+.compression-unit :is(.method-rle,.method-lz,.lzw-setup,.huffman-setup,.lzw-results) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 10px 14px;
+}
+.compression-unit :is(.lzw-setup,.huffman-setup)[hidden] { display: none; }
+.compression-unit :is(.lzw-setup,.huffman-setup,.lzw-results) { margin-top: 10px; }
+.compression-unit .method-rle > .rle-groups { grid-column: 2; grid-row: 1 / span 2; }
+.compression-unit .method-rle > .method-result { grid-column: 1 / -1; }
+.compression-unit .method-lz { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 8px 12px; }
+.compression-unit .method-lz .method-copy p { margin-bottom: 4px; }
+.compression-unit :is(.method-rle,.method-lz) .text-input { margin: 0; }
+.compression-unit :is(.method-lz,.lzw-results) > .compression-size-result { margin: 0; }
+.compression-unit .method-lz .lz-stage { margin: 0; padding: 9px; }
+.compression-unit .method-lz .lz-string { margin: 0; padding: 8px; }
+.compression-unit .method-lz .lz-string i { width: 27px; height: 30px; }
+.compression-unit .method-lz .method-result { margin-top: 8px; padding: 10px; }
+.compression-unit .method-lz .lz-readout { align-items: start; }
+.compression-unit .method-lz .lz-readout > span { flex: none; }
+.compression-unit .u27-content :is(.compression-input > p[id$='-help'], .compression-input .active-input,
+  .current-action-legend, .prefix-code-tree p, .encoded-progress p, .huffman-source small) {
+  font-size: var(--u27-body);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.compression-unit :is(.lzw-setup,.huffman-setup) .compression-input { margin: 0; padding: 10px; }
+.compression-unit .lzw-setup { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+.compression-unit .lzw-setup .lzw-rules { padding: 10px; }
+.compression-unit .lzw-setup .lzw-rule-card { padding: 8px; }
+.compression-unit .lzw-setup .lzw-rule-card h5 { margin-bottom: 4px; }
+.compression-unit .lzw-setup .lzw-shared-rule { padding: 6px 8px; }
+.compression-unit .lzw-setup .lzw-rules h4 { margin-bottom: 6px; }
+.compression-unit .huffman-setup { grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr); }
+.compression-unit .lzw-setup .lzw-rule-card dl { margin: 5px 0; }
+.compression-unit .lzw-results .dictionary-answer { margin: 0; }
+
+.compression-unit :is(.lzw-stage, .decode-lab, .huffman-count, .huffman-assignment,
+  .huffman-encode, .huffman-decode) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 8px 12px;
+  margin-top: 10px;
+  padding: 10px;
+}
+.compression-unit :is(.lzw-stage, .decode-lab, .huffman-count, .huffman-assignment,
+  .huffman-encode, .huffman-decode) > * { min-width: 0; margin: 0; }
+.compression-unit :is(.lzw-stage,.huffman-count,.huffman-encode,.huffman-decode)
+  > :is(.step-card,input,.step-buttons,.phase-next,.decode-result,.compression-step-actions) { grid-column: 1; }
+.compression-unit .lzw-stage > :is(h4,.experience-label,.source-progress),
+.compression-unit .huffman-count > :is(.experience-label,.huffman-source-characters),
+.compression-unit .huffman-encode > .encoding-codebook,
+.compression-unit .huffman-decode > :is(.experience-label,.continuous-bitstream,.bitstream-legend) { grid-column: 1 / -1; }
+.compression-unit .lzw-stage > .dictionary-growth { grid-column: 2; grid-row: 4 / span 4; }
+.compression-unit .huffman-count > .frequency-counter { grid-column: 2; grid-row: 3 / span 3; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.compression-unit .huffman-encode > .encoded-progress { grid-column: 2; grid-row: 2 / span 5; }
+.compression-unit .huffman-decode > .decode-step-stable { grid-column: 2; grid-row: 4 / span 3; }
+.compression-unit .method-panel .step-card { min-height: 0; padding: 10px; }
+.compression-unit .method-panel .phase-next { justify-self: start; }
+.compression-unit :is(.source-progress,.huffman-source-characters) { gap: 3px; }
+.compression-unit :is(.source-progress,.huffman-source-characters) i { width: 27px; height: 40px; }
+.compression-unit .source-progress i small { font-size: var(--u27-small); }
+.compression-unit .dictionary-growth { grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: 6px; }
+.compression-unit .dictionary-growth > div { padding: 8px; }
+.compression-unit .dictionary-growth p { gap: 4px; margin-top: 4px; }
+.compression-unit .dictionary-growth p i { gap: 3px; padding: 2px 4px; }
+.compression-unit .lzw-emitted-codes { gap: 4px; margin-top: 4px; }
+.compression-unit .lzw-emitted-codes i { min-height: 26px; min-width: 27px; padding: 3px; }
+.compression-unit .lzw-emitted-codes i.is-new b { font-size: 20px; }
+.compression-unit .decode-dictionary { padding: 8px; }
+.compression-unit .method-lzw .decode-dictionary > div { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.compression-unit .method-lzw .decode-dictionary i { grid-template-columns: 24px minmax(0, 1fr); gap: 0 3px; min-width: 0; padding: 3px; }
+.compression-unit .decode-dictionary i b { grid-row: auto; width: 24px; height: 24px; }
+.compression-unit .method-lzw .decode-dictionary i small { grid-column: 1 / -1; text-align: center; }
+.compression-unit .method-lzw .decode-dictionary i em { overflow-wrap: anywhere; }
+.compression-unit .method-lzw .decode-dictionary i :is(em,small) { line-height: 1.2; }
+.compression-unit .method-lzw .decode-dictionary i.is-new em { font-size: var(--u27-control); }
+.compression-unit .method-lzw > .decode-lab { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
+.compression-unit :is(.lzw-decode-trace,.lzw-decode-state) { display: grid; align-content: start; gap: 8px; }
+.compression-unit :is(.lzw-decode-trace,.lzw-decode-state) > * { min-width: 0; margin: 0; }
+.compression-unit .lzw-decode-trace > input { width: 100%; accent-color: var(--teal); }
+.compression-unit .lzw-decode-trace .output-code-row { gap: 4px; }
+.compression-unit .lzw-decode-trace .output-code-row i { width: 28px; height: 28px; padding: 2px; }
+.compression-unit .lzw-decode-trace > .step-buttons { flex-wrap: wrap; }
+.compression-unit .method-lzw .decode-heading h4 { margin-block: 0; }
+.compression-unit .lzw-decode-trace .decode-heading > span { display: none; }
+
+.compression-unit .huffman-assignment { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); row-gap: 4px; padding-block: 6px; }
+.compression-unit .huffman-assignment > .huffman-assignment-visuals { grid-column: 1; grid-row: 1 / span 3; gap: 8px; }
+.compression-unit .huffman-assignment > :is(.step-card,.assignment-controls,.assignment-footnote) { grid-column: 2; }
+.compression-unit .huffman-assignment-visuals { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.compression-unit .huffman-assignment .tree-scroll { min-width: 0; }
+.compression-unit .huffman-assignment .prefix-code-tree svg { width: 100%; min-width: 0; }
+.compression-unit .huffman-assignment .prefix-code-tree .tree-edge text { font-size: 17px; }
+.compression-unit .huffman-assignment .prefix-code-tree .tree-pending-label { font-size: 14px; }
+.compression-unit .huffman-assignment .assignment-controls { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px; }
+.compression-unit .huffman-assignment .assignment-controls input { grid-column: 1 / -1; grid-row: 1; min-width: 0; width: 100%; }
+.compression-unit .huffman-assignment .assignment-controls button { min-width: 0; }
+.compression-unit .huffman-assignment .assignment-code-table .huffman-table-head,
+.compression-unit .huffman-assignment .assignment-code-table .huffman-table > div { grid-template-columns: 36px minmax(0, 1fr) 98px; }
+.compression-unit .huffman-table.assignment-table { gap: 4px; }
+.compression-unit .huffman-table.assignment-table > div { padding: 4px 6px; }
+
+.compression-unit .huffman-encode { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); row-gap: 5px; padding-block: 6px; }
+.compression-unit .huffman-encode .encoding-codebook {
+  grid-template-columns: minmax(140px, .27fr) minmax(0, 1fr);
+  align-items: center;
+  padding: 6px 9px;
+}
+.compression-unit .huffman-encode .encoding-codebook i { padding: 4px 7px; }
+.compression-unit .huffman-encode .huffman-source { padding: 6px; gap: 3px; }
+.compression-unit .huffman-encode .huffman-source-characters.compact {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+}
+.compression-unit .huffman-encode .huffman-source-characters.compact i { width: 100%; height: 27px; }
+.compression-unit .huffman-encode .encoded-progress .encoded-symbols { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 4px; margin-top: 4px; }
+.compression-unit .huffman-encode .encoded-progress .encoded-symbols i {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  min-width: 0;
+  min-height: 40px;
+  padding: 2px 3px;
+  gap: 0 3px;
+}
+.compression-unit .huffman-encode .encoded-symbols b { line-height: 1.2; }
+.compression-unit .huffman-encode .encoded-progress .encoded-symbols code { font-size: var(--u27-small); overflow-wrap: anywhere; }
+.compression-unit .huffman-encode .encoded-progress .encoded-symbols small { grid-column: 1 / -1; font-size: var(--u27-small); line-height: 1.25; }
+.compression-unit .huffman-encode .encoded-progress p { margin-top: 5px; }
+.compression-unit .compression-step-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.compression-unit .compression-step-actions > .step-buttons { flex: 1 0 auto; justify-content: start; gap: 6px; }
+.compression-unit .compression-step-actions > .step-buttons button { min-width: 0; padding-inline: 8px; }
+.compression-unit .compression-step-actions > .phase-next { flex: 1 0 auto; width: auto; margin: 0; padding-inline: 8px; }
+.compression-unit .huffman-decode .continuous-bitstream { padding: 6px 10px; }
+.compression-unit .huffman-decode .continuous-bitstream code { line-height: 1.5; }
+.compression-unit .decode-step-stable .bit-reading { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: auto; gap: 4px; margin: 0; }
+.compression-unit .decode-step-stable .bit-reading > div { grid-template-columns: auto minmax(0, 1fr); padding: 4px; }
+.compression-unit .decode-step-stable .bit-reading b { grid-row: auto; width: 22px; height: 22px; }
+.compression-unit .decode-step-stable .bit-reading span { font-size: var(--u27-small); overflow-wrap: anywhere; }
+.compression-unit .decode-step-stable .bit-reading small { grid-column: 1 / -1; font-size: var(--u27-small); line-height: 1.25; }
+.compression-unit .decode-step-stable .decode-candidates { margin-top: 8px; padding: 7px; }
+.compression-unit .decode-step-stable .decode-candidates > div { grid-template-columns: repeat(7, minmax(0, 1fr)); grid-auto-rows: auto; gap: 4px; }
+.compression-unit .decode-step-stable .decode-candidates i { padding: 3px; gap: 0; text-align: center; }
+.compression-unit .decode-step-stable .compression-step-actions { margin-top: 8px; }
+.compression-unit .difference-markers circle { r: 16px; }
+.compression-unit .difference-markers text { font-size: 22px; dominant-baseline: central; transform: translateY(-5px); }
+
+@media (max-width: 860px) {
+  .compression-unit .compression-intro,
+  .compression-unit .section-title-row { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .compression-unit .section-question { max-width: 42em; }
+  .compression-unit .lossless-workbench { grid-template-columns: minmax(0, 1fr); }
+  .compression-unit .video-workbench { grid-template-columns: minmax(0, 1fr); }
+  .compression-unit .video-workbench-notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .compression-unit .video-workbench-notes .teacher-note { margin: 0; }
+  .compression-unit .huffman-assignment { grid-template-columns: minmax(0, 1fr); }
+  .compression-unit .huffman-assignment > * { grid-column: 1; grid-row: auto; }
+  .compression-unit .huffman-assignment > .huffman-assignment-visuals { grid-row: auto; }
+}
+
+@media (max-width: 700px) {
+  .compression-unit .compression-intro h1 { font-size: clamp(32px, 6.8vw, 44px); }
+  .compression-unit .learning-paths { grid-template-columns: minmax(0, 1fr); }
+  .compression-unit .learning-paths a { min-height: 70px; }
+  .compression-unit .format-question fieldset > div { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .compression-unit :is(.compression-basics-panel, .compression-rate-lab, .codec-lab, .format-choice-lab,
+    .lossless-workbench, .keyframe-lab, .image-compression-lab) { padding: 14px; }
+  .compression-unit :is(.compression-overview,.compression-rate-lab,.image-compression-lab,.image-format-stage,
+    .method-rle,.method-lz,.lzw-setup,.huffman-setup,.lzw-results,.lzw-stage,.method-lzw > .decode-lab,
+    .huffman-count,.huffman-encode,.huffman-decode,.video-workbench-notes) { grid-template-columns: minmax(0, 1fr); }
+  .compression-unit :is(.method-rle,.method-lz,.lzw-stage,.huffman-count,.huffman-encode,.huffman-decode)
+    > :is(.rle-groups,.dictionary-growth,.decode-dictionary,.frequency-counter,.encoded-progress,.decode-step-stable) { grid-column: 1; grid-row: auto; }
+  .compression-unit .compression-flow { grid-template-columns: minmax(0, 1fr); }
+  .compression-unit .compression-arrow i { transform: rotate(90deg); }
+  .compression-unit .rate-answer { grid-template-columns: minmax(0, 1fr); }
+  .compression-unit .keyframe-compare { grid-template-columns: minmax(0, 1fr); }
+  .compression-unit .keyframe-compare > i { justify-self: center; transform: rotate(90deg); }
+  .compression-unit .frame-timeline { grid-template-columns: minmax(0, 1fr); }
+  .compression-unit .huffman-assignment-visuals { grid-template-columns: minmax(0, 1fr); }
+  .compression-unit .huffman-encode .encoding-codebook { grid-template-columns: minmax(0, 1fr); }
+  .compression-unit .huffman-encode .huffman-source-characters.compact { grid-template-columns: repeat(10, minmax(0, 1fr)); }
+  .compression-unit .decode-step-stable .bit-reading { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .compression-unit .decode-step-stable .decode-candidates > div,
+  .compression-unit .huffman-encode .encoded-progress .encoded-symbols { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .compression-unit .dictionary-growth { grid-template-columns: minmax(0, 1fr); }
+  .compression-unit .method-lzw .decode-dictionary > div { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}

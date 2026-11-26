@@ -1,5 +1,8 @@
 'use client';
 
+import { SectionTerms } from '@/app/components/revision2027/ImportantTerms';
+import { importantTerms, sections } from '../importantTerms';
+
 import { useState } from 'react';
 
 type FormatId = 'ZIP' | 'GIF' | 'PNG' | 'JPEG' | 'AAC' | 'MPEG-4（H.264）';
@@ -36,8 +39,8 @@ export function FormatsLab() {
   };
 
   return (
-    <section className="learning-section" id="formats">
-      <div className="section-kicker"><span>02</span><p>圧縮の形式と利用 · 教科書 p.63</p></div>
+    <section className="learning-section u27-section" id={sections.formats.id}>
+      <div className="section-kicker"><span>{sections.formats.number}</span><p>圧縮の形式と利用 · 教科書 p.63</p></div>
       <div className="section-title-row">
         <div><p className="step-label">目的から形式を選ぶ</p><h2>同じ圧縮形式で、全部を小さくできる？</h2></div>
         <p className="section-question">元へ完全に戻す必要と、データの特徴から形式を選ぼう。</p>
@@ -79,13 +82,15 @@ export function FormatsLab() {
           {correct && choice !== scenario.best && <span>小ささを最優先する場合の第一候補は <b>{scenario.best}</b> です。</span>}
         </div>}
 
-        <div className="audio-band">
-          <div><p className="step-label">AUDIO BAND</p><h4>音声圧縮では、聞こえ方も利用する</h4><p>必要な周波数帯に絞るとデータ量を減らせます。電話では会話に必要な帯域を中心に扱います。</p></div>
-          <div className="frequency-line" aria-label="人の可聴域20ヘルツから20000ヘルツと電話の音声300ヘルツから3400ヘルツ">
-            <span className="full-band">人の可聴域 20〜20,000 Hz</span><i className="phone-band">電話 300〜3,400 Hz</i><small className="low">低い音</small><small className="high">高い音</small>
-          </div>
+      </div>
+
+      <div className="audio-band">
+        <div><p className="step-label">AUDIO BAND</p><h3>音声圧縮では、聞こえ方も利用する</h3><p>必要な周波数帯に絞るとデータ量を減らせます。電話では会話に必要な帯域を中心に扱います。</p></div>
+        <div className="frequency-line" aria-label="人の可聴域20ヘルツから20000ヘルツと電話の音声300ヘルツから3400ヘルツ">
+          <span className="full-band">人の可聴域 20〜20,000 Hz</span><i className="phone-band">電話 300〜3,400 Hz</i><small className="low">低い音</small><small className="high">高い音</small>
         </div>
       </div>
+      <SectionTerms section={sections.formats} terms={importantTerms} />
     </section>
   );
 }

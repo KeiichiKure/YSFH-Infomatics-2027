@@ -1,5 +1,8 @@
 'use client';
 
+import { SectionTerms } from '@/app/components/revision2027/ImportantTerms';
+import { importantTerms, sections } from '../importantTerms';
+
 import { useEffect, useRef, useState } from 'react';
 
 type ImageFormat = 'BMP' | 'GIF' | 'JPEG' | 'PNG';
@@ -102,8 +105,8 @@ export function ImageCompressionLab() {
   }, [format, palette, quality, scene]);
 
   return (
-    <section className="learning-section" id="images-compression">
-      <div className="section-kicker"><span>04</span><p>画像の圧縮形式と特徴 · 教科書 p.65</p></div>
+    <section className="learning-section u27-section" id={sections.images.id}>
+      <div className="section-kicker"><span>{sections.images.number}</span><p>画像の圧縮形式と特徴 · 教科書 p.65</p></div>
       <div className="section-title-row">
         <div><p className="step-label">見え方と用途を比べる</p><h2>写真とイラストに、同じ形式を使う？</h2></div>
         <p className="section-question">色の境界とグラデーションを観察し、形式ごとの得意・不得意を見つけよう。</p>
@@ -111,6 +114,7 @@ export function ImageCompressionLab() {
 
       <div className="image-compression-lab">
         <div className="lab-heading"><div><p className="step-label">IMAGE FORMAT LAB</p><h3>BMP・GIF・JPEG・PNGを比較</h3></div><span className="print-badge"><small>プリント</small><b>14〜18</b></span></div>
+        <div className="compression-image-controls">
         <div className="image-lab-toolbar">
           <div aria-label="画像の種類"><span>1　画像を選ぶ</span><div><button type="button" className={scene === 'illustration' ? 'is-active' : ''} onClick={() => setScene('illustration')}>色数の少ない図</button><button type="button" className={scene === 'photo' ? 'is-active' : ''} onClick={() => setScene('photo')}>写真・グラデーション</button></div></div>
           <div aria-label="画像形式"><span>2　形式を選ぶ</span><div>{(['BMP', 'GIF', 'JPEG', 'PNG'] as ImageFormat[]).map((item) => <button type="button" className={format === item ? 'is-active' : ''} key={item} onClick={() => setFormat(item)}>{item}</button>)}</div></div>
@@ -122,6 +126,8 @@ export function ImageCompressionLab() {
           {format === 'PNG' && <div className="image-quality-control is-static"><b>指定する項目はありません</b><span>PNGは可逆圧縮なので、保存後も画素の色を元どおりに戻せます。</span></div>}
           {format === 'BMP' && <div className="image-quality-control is-static"><b>指定する項目はありません</b><span>BMPはこの教材では非圧縮として扱うため、圧縮品質を選びません。</span></div>}
         </div>
+        </div>
+        <div className="compression-image-preview">
         <div className="image-format-stage">
           <div className="image-canvas-frame"><canvas ref={canvasRef} aria-label={`${scene === 'illustration' ? '色数の少ない図' : '写真風のグラデーション'}を${format}形式の特徴に合わせて表示`} /></div>
           <div className="format-inspector">
@@ -138,13 +144,9 @@ export function ImageCompressionLab() {
           {format === 'BMP' && <p><b>すべて保存：</b>画素をそのまま持つため見た目は保てますが、データ量が大きくなります。</p>}
           {format === 'PNG' && <p><b>可逆でフルカラー：</b>輪郭も色も保てますが、写真ではJPEGより大きくなる傾向があります。</p>}
         </div>
-        <div className="print-callout print-callout-four">
-          <span className="print-number"><small>プリント</small><b>14</b></span><strong>BMP</strong><em>非圧縮で大きい</em>
-          <span className="print-number"><small>プリント</small><b>15・16</b></span><strong>GIF・256色</strong><em>色数の少ない図向き</em>
-          <span className="print-number"><small>プリント</small><b>17</b></span><strong>JPEG</strong><em>非可逆で写真向き</em>
-          <span className="print-number"><small>プリント</small><b>18</b></span><strong>PNG</strong><em>可逆でフルカラー</em>
         </div>
       </div>
+      <SectionTerms section={sections.images} terms={importantTerms} />
     </section>
   );
 }
