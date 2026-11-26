@@ -8,7 +8,13 @@ export function SectionTerms({ section, terms }: { section: LearningSection; ter
       {section.worksheetLabel && <span>プリント {section.worksheetLabel}</span>}
     </div>
     <dl className="u27-term-cards">{terms.filter(t => t.sectionId === section.id).map(t =>
-      <div key={t.id}><dt>{t.term}</dt><dd>{t.definition}</dd></div>
+      <div key={t.id}>
+        <dt>
+          {t.term}
+          {t.worksheetBlanks?.length ? <small className="u27-term-blank">プリント {t.worksheetBlanks.join('・')}</small> : null}
+        </dt>
+        <dd>{t.definition}</dd>
+      </div>
     )}</dl>
   </aside>;
 }

@@ -1,0 +1,62 @@
+.unit-2027 .u27-course-menu ol { display: grid; gap: 4px; margin: 12px 0; }
+.unit-2027 .u27-course-menu li { margin: 0; padding: 0; }
+.unit-2027 .u27-course-menu li a { display: flex; align-items: center; gap: 9px; }
+.unit-2027 .u27-course-menu li span {
+  display: grid;
+  place-items: center;
+  flex: 0 0 24px;
+  min-height: 24px;
+  border-radius: 5px;
+  color: white;
+  background: var(--teal-dark);
+  font-weight: 800;
+}
+.unit-2027 .u27-course-menu > p { display: block; }
+.unit-2027 .u27-course-menu small,
+.unit-2027 .u27-course-menu .nav-note p { font-size: var(--u27-small); }
+.unit-2027 .u27-course-menu .nav-note { margin: 12px 0; }
+.unit-2027 .u27-course-menu .nav-note b { font-size: var(--u27-control); }
+.unit-2027 .u27-course-menu .id-class-plan span { display: block; font-size: var(--u27-small); }
+.unit-2027 .u27-course-menu .id-class-plan { padding: 10px 0; }
+
+.unit-2027 .u27-content .u27-course-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 22px 30px;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+.unit-2027 .u27-course-copy .eyebrow { margin: 0 0 10px; font-size: var(--u27-small); }
+.unit-2027 .u27-course-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.unit-2027 .u27-content .u27-course-badges > span {
+  display: inline-flex;
+  margin: 0;
+  padding: 3px 9px;
+  border: 1px solid #b9d0ca;
+  border-radius: 8px;
+  background: #edf5f0;
+  color: var(--teal-dark);
+  font-size: var(--u27-small);
+  font-weight: 800;
+}
+.unit-2027 .u27-content .u27-course-intro h1 {
+  margin: 14px 0 10px;
+  font-size: clamp(36px, 4.1vw, 52px);
+  line-height: 1.35;
+}
+.unit-2027 .u27-content .u27-course-copy > p:last-child { margin: 0; color: var(--u27-muted); font-size: var(--u27-body); }
+.unit-2027 .u27-course-support { display: flex; flex-direction: column-reverse; gap: 12px; }
+.unit-2027 .u27-content :is(.u27-course-paths,.u27-course-note) { grid-column: 1 / -1; margin: 0; }
+.unit-2027 .u27-course-paths b { font-size: var(--u27-body); }
+.unit-2027 .u27-course-paths :is(small,span),
+.unit-2027 .u27-course-note { font-size: var(--u27-small); }
+
+@media (max-width: 860px) {
+  .unit-2027 .u27-content .u27-course-intro { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
+
+@media (max-width: 700px) {
+  .unit-2027 .u27-content .u27-course-intro h1 { font-size: clamp(32px, 6.8vw, 44px); }
+  .unit-2027 .u27-content .u27-course-paths { grid-template-columns: minmax(0, 1fr); }
+}

@@ -5,18 +5,22 @@ import thinking from '@/public/mascots/student-thinking.png';
 import understood from '@/public/mascots/student-understood.png';
 import celebrating from '@/public/mascots/student-celebrating.png';
 import praise from '@/public/mascots/teacher-praise.png';
+import { SectionTerms } from '@/app/components/revision2027/ImportantTerms';
 import { sections, terms } from './lessonData';
+
+const overviewTerms = terms.filter(({ term }) => ['可視化', '構造化', '抽象化'].includes(term))
+  .map(term => ({ ...term, sectionId: sections[0].id }));
 
 export function Guide({ children, mood = 'thinking' }: { children: ReactNode; mood?: 'thinking' | 'understood' | 'celebrating' | 'praise' }) {
   return <aside className="id-guide"><Image src={{ thinking, understood, celebrating, praise }[mood]} alt={{ thinking: '考える生徒', understood: '気づいた生徒', celebrating: '喜ぶ生徒', praise: '先生' }[mood]} /><div>{markText(children)}</div></aside>;
 }
 export function Section({ n, lead, children }: { n: number; lead: string; children: ReactNode }) {
   const s = sections[n - 1];
-  return <section id={s.id} className="id-section"><div className="id-kicker"><span>{n}</span><p>体験して、理由をつかもう</p><small>教科書 {s.page}</small></div><div className="id-heading"><h2>{s.title}</h2><span className="id-print"><small>プリント11</small><b>{s.blanks}</b></span></div><p className="id-lead"><KeyText>{lead}</KeyText></p>{children}<Terms n={n} /></section>;
+  return <section id={s.id} className="id-section u27-section"><div className="id-kicker"><span>{n}</span><p>体験して、理由をつかもう</p><small>教科書 {s.page}</small></div><div className="id-heading"><h2>{s.title}</h2><span className="id-print"><small>プリント11</small><b>{s.blanks}</b></span></div><p className="id-lead"><KeyText>{lead}</KeyText></p>{children}<Terms n={n} /></section>;
 }
 export function Terms({ n }: { n: number }) {
-  const selected = terms.filter(t => t.sectionNumber === n || n === 1 && ['可視化', '構造化', '抽象化'].includes(t.term));
-  return <div className="id-terms"><h3>この体験から、プリントへ</h3><p className="id-small">丸数字はプリントの空欄番号です。</p><div className="id-term-grid">{selected.map(t => <article key={t.id}>{t.worksheetBlanks.length > 0 && <span className="id-blank"><small>プリント</small>{t.worksheetBlanks.join('・')}</span>}<div><h4>{t.term}</h4><p><KeyText>{t.definition}</KeyText></p><p className="id-example">例では：<KeyText>{t.example}</KeyText></p></div></article>)}</div></div>;
+  const { id, title, blanks } = sections[n - 1];
+  return <SectionTerms section={{ id, number: n, label: title, worksheetLabel: `11 · ${blanks}` }} terms={n === 1 ? [...terms, ...overviewTerms] : terms} />;
 }
 export function Frame({ id, title, children, footer, note }: { id: string; title: string; children: ReactNode; footer?: ReactNode; note?: string }) {
   const ref = useRef<HTMLDivElement>(null);

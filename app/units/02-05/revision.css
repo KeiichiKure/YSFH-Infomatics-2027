@@ -1,0 +1,83 @@
+.information-design-unit .unit-2027 {
+  --id-body: var(--u27-body);
+  --id-control: var(--u27-control);
+  --id-title: var(--u27-heading);
+}
+.information-design-unit .u27-toggle,
+.information-design-unit .u27-content :is(button, select) { min-height: 44px; font-size: var(--u27-control); }
+.information-design-unit .u27-course-support :is(.id-mission,.id-guide) { margin: 0; max-width: none; }
+.information-design-unit .u27-course-support .id-guide { gap: 10px; }
+.information-design-unit .u27-course-support .id-guide img { width: 76px; height: 80px; }
+.information-design-unit .u27-course-support .id-guide > div { padding: 12px 13px; }
+.information-design-unit .u27-course-support :is(.id-mission strong,.id-guide b) { font-size: var(--u27-body); }
+.information-design-unit .u27-course-support .id-guide p { font-size: var(--u27-small); }
+.information-design-unit .id-section.u27-section { padding-top: 0; border: 0; scroll-margin-top: 84px; }
+.information-design-unit .id-heading h2 { font-size: var(--u27-section); }
+.information-design-unit .u27-content :is(.id-frame h3,.id-carb-explanation h3,.id-definition-pair h3) { font-size: var(--u27-heading); }
+.information-design-unit .u27-content :is(.id-lead,.id-feedback p,.id-prompt,.id-note p,.id-scene > p,.id-definition-pair p,
+  .id-carb-explanation p,.id-report p,.id-choice h4,.id-quiz-question h4,.id-summary) {
+  font-size: var(--u27-body);
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.information-design-unit .u27-content :is(.id-note summary,.id-data-table :is(td,th),.id-class-plan span,.id-frame .id-fit) { font-size: var(--u27-control); }
+.information-design-unit .u27-content :is(.id-print small,.id-kicker small,.id-small,.id-source,.id-chart text) { font-size: var(--u27-small); }
+.information-design-unit .u27-content :is(.id-frame,.id-carb-explanation) { scroll-margin-top: 72px; }
+.information-design-unit .u27-content .id-frame .id-fit { min-height: 44px; }
+.information-design-unit .u27-content .lesson-footer { margin-top: 40px; }
+.information-design-unit .u27-content .id-frame .id-choice { gap: 6px; }
+.information-design-unit .u27-content .id-quiz-columns .id-feedback { min-height: 105px; padding: 8px 10px; }
+.information-design-unit .u27-content .id-frame .id-step-position { font-size: var(--u27-control); }
+.information-design-unit .u27-content .id-evidence > .id-tabs { margin-bottom: 8px; }
+.information-design-unit .u27-content .id-carb-explanation { margin: 0; padding: 0; border: 0; }
+.information-design-unit .u27-content .id-carb-explanation :is(.id-rice-sample-ad,.id-rice-takeaway,.id-rice-cases) { margin: 0; }
+.information-design-unit .u27-content .id-rice-cases > section { padding: 10px 14px; }
+.information-design-unit .u27-content .id-rice-cases h4 { min-height: 0; }
+.information-design-unit .u27-content .id-carb-explanation :is(.id-rice-cases,.id-rice-review,.id-rice-setup) p { margin-block: 8px; }
+.information-design-unit .u27-content .id-rice-worked-calculation { background: #eef5fb; border: 1px solid #b7cdca; border-radius: 8px; padding: 12px 16px; }
+.information-design-unit .u27-content .id-rice-worked-calculation h4 { margin: 0; }
+.information-design-unit .u27-content .id-cup-grid { gap: 10px; }
+.information-design-unit .u27-content .id-cup-card { padding: 8px 12px; }
+.information-design-unit .u27-content :is(.id-cup-card p,.id-cup-takeaway p) { font-size: var(--u27-body); line-height: 1.55; }
+.information-design-unit .u27-content .id-cup-card figcaption { gap: 4px 8px; margin: 6px 0; }
+.information-design-unit .u27-content .id-cup-card p { margin-top: 6px; }
+.information-design-unit .u27-content .id-cup-takeaway { margin: 7px 0; }
+.information-design-unit .u27-content #action-cues-quiz :is(.id-prompt,.id-source-link,.id-cup-learning > .id-compact) { margin-block: 4px; }
+
+@media (min-width: 960px) {
+  .information-design-unit .u27-content :is(#poster-lab,#map-placement) { gap: 6px; padding-block: 9px; }
+  .information-design-unit .u27-content #map-placement .id-weather-focus { padding-block: 8px; margin-block: 6px; }
+  .information-design-unit .u27-content #map-placement .id-weather-focus > div { gap: 5px; }
+  .information-design-unit .u27-content #poster-lab .id-poster-checks label { min-height: 44px; }
+  .information-design-unit .u27-content .id-frame:has(> .id-quiz-columns) {
+    grid-template-columns: minmax(0, 1fr) minmax(290px, .66fr);
+    gap: 8px 12px;
+  }
+  .information-design-unit .u27-content .id-frame:has(> .id-quiz-columns) > :is(.id-quiz-columns,.id-player) { grid-column: 1 / -1; }
+  .information-design-unit .u27-content .id-frame:has(> .id-quiz-columns) > header h3 { min-width: 0; }
+  .information-design-unit .u27-content .id-frame > .id-stats { align-items: stretch; gap: 4px; }
+  .information-design-unit .u27-content .id-stats > div { flex-direction: column; justify-content: center; gap: 0; padding: 3px 5px; }
+  .information-design-unit .u27-content .id-stats strong { font-size: 18px; }
+  .information-design-unit .u27-content :is(#visualization-quiz,#inclusive-quiz,.id-frame) .id-quiz-columns { min-height: 430px; }
+  .information-design-unit .u27-content #inclusive-quiz .id-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .information-design-unit .u27-content #inclusive-quiz .id-options button { padding-inline: 6px; }
+  .information-design-unit .u27-content .id-report-example :is(h4,svg),
+  .information-design-unit .u27-content .id-report .id-report-after { margin-block: 0; }
+  .information-design-unit .u27-content :is(.id-rice-intro,.id-rice-review) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+  .information-design-unit .u27-content .id-rice-cooking-flow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 4px 8px;
+    align-items: center;
+  }
+  .information-design-unit .u27-content .id-rice-cooking-flow > :is(h5,p) { grid-column: 1 / -1; margin: 0; }
+  .information-design-unit .u27-content .id-rice-cooked { grid-column: 3; grid-row: 2; }
+  .information-design-unit .u27-content .id-rice-cook-arrow { transform: rotate(-90deg); }
+  .information-design-unit .u27-content .id-cup-card img { height: clamp(118px, 23vh, 172px); object-fit: contain; }
+}
+
+@media (max-width: 700px) {
+  .information-design-unit .id-heading { flex-wrap: wrap; gap: 6px; }
+  .information-design-unit .id-frame > header { flex-wrap: wrap; }
+  .information-design-unit .id-frame .id-fit { margin-left: auto; }
+}

@@ -21,6 +21,7 @@
 .unit-2027 .u27-term-cards > div { display: grid; grid-template-columns: minmax(90px,.7fr) minmax(0,1.5fr); gap: 10px; min-width: 0; padding: 14px 16px; border: 1px solid var(--u27-line); border-radius: 9px; background: white; }
 .unit-2027 .u27-term-cards dt, .unit-2027 .u27-term-cards dd { font-size: var(--u27-term); overflow-wrap: anywhere; }
 .unit-2027 .u27-term-cards dt { font-weight: 800; }
+.unit-2027 .u27-term-blank { display: block; width: fit-content; margin-top: 5px; padding: 2px 7px; border-radius: 5px; background: #edf5f0; color: var(--u27-green); font-size: var(--u27-small); font-weight: 700; }
 .unit-2027 .u27-term-cards dd { margin: 0; color: var(--u27-muted); }
 .unit-2027 :focus-visible { outline: 3px solid var(--u27-green); outline-offset: 3px; }
 @media (max-width: 700px) {

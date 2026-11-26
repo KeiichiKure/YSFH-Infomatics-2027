@@ -1,4 +1,9 @@
-import {KeyText,Note} from './LessonParts';
+'use client';
+
+import {useState} from 'react';
+import {Frame,KeyText,Note} from './LessonParts';
+import {StepControls} from './StepControls';
+
 
 export const riceAd='https://www.caa.go.jp/notice/assets/representation_cms215_240208_03.pdf#page=5';
 const riceOrder='https://www.caa.go.jp/notice/assets/representation_cms215_240208_08.pdf#page=8';
@@ -11,9 +16,17 @@ function SampleRiceAd(){return <figure className="id-rice-sample-ad" aria-label=
 
 function CookingFlow({moreWater}:{moreWater:boolean}){return <section className="id-rice-cooking-flow"><h5>{moreWater?'「糖質カット」をうたう炊飯器':'通常の炊飯器'}</h5><div className="id-rice-raw"><span>炊く前：乾いた米</span><strong>150g</strong><span>含まれる糖質100g</span></div><span className="id-rice-cook-arrow" aria-hidden="true">↓</span><p>{moreWater?'水分が多く残る場合を考える':'通常の水分量で炊く'}</p><div className="id-rice-cooked"><span>炊き上がり：ごはん</span><strong>{moreWater?'360':'300'}g</strong><span>糖質の総量は100g</span></div></section>;}
 
-export function CarbExplanation(){return <article className="id-carb-explanation" id="carb-comparison-explanation"><h3>「糖質が少ない」って、何を同じにして比べている？</h3><SampleRiceAd/><div className="id-rice-first-impression"><b>この広告を見た人は、こう思うかもしれない</b><p>「すごい！ お米の糖質を減らしてくれる炊飯器なんだ！」</p></div><p><KeyText>その受け取り方でよいかな？ グラフは数値を分かりやすく伝えますが、比較の基準を見落とすと、意味を取り違えてしまいます。炊く前から順に確かめよう。</KeyText></p>
-<div className="id-rice-setup"><h4>① まず、同じ150gの米から炊いてみる</h4><p>どちらも<strong>乾いた米150g</strong>からスタート。米に含まれる糖質を<strong>100g</strong>とし、炊飯中に糖質は取り除かれないと仮定します。</p><div className="id-rice-cooking-grid"><CookingFlow moreWater={false}/><CookingFlow moreWater/></div><p>右は水分が多く残ったため、ごはんの重さが増えました。<strong>ごはんの重さが増えることと、糖質が取り除かれることは別です。</strong></p><p className="id-compact">仕組みを考えるための仮定です。米・ごはんの重さや糖質量は、実測値や上の実際の広告の測定値ではありません。</p></div>
-<div className="id-rice-cases"><section><h4>② A．茶碗に同じ150gずつよそうと？</h4><div className="id-rice-portions"><RicePortion whole={false} moreWater={false}/><RicePortion whole={false} moreWater/></div><p><strong>同じ重さを食べるなら、水分が多い方の糖質は少なくなります。</strong>同じ150gの中で、水分の占める分が増え、米に由来する成分の分が減るからです。</p><p>この仮定では、<strong>「150g当たり約17％OFF」という計算は成り立ちます。</strong>ただし、「元の米から糖質を17％取り除いた」という意味ではありません。</p></section><section><h4>③ B．同じ150gの米から炊いた分を全部食べると？</h4><div className="id-rice-portions"><RicePortion whole moreWater={false}/><RicePortion whole moreWater/></div><p><strong>こちらは、糖質100gで同じです。</strong>ごはんの重さが増えても、米に含まれていた糖質そのものが取り除かれたとは限らないからです。</p><p>茶碗1杯の比較で糖質が少なくても、<strong>炊いた分を全部食べるなら、糖質の総量が減るとは限りません。</strong></p></section></div>
-<div className="id-rice-takeaway"><h4>伝えたいこと：グラフの外にある「比べ方」を確かめよう</h4><p><KeyText>「100g当たり」「1食当たり」「同じ米から炊いた全量」など、比較の基準をそろえて読みます。棒が短いだけで「含まれていた糖質そのものが減った」と決めつけず、何を同じにして比べた数値かを確認しよう。</KeyText></p></div>
-<Note title="計算を確かめる：なぜ50gと約41.7gになる？"><p>通常は、ごはん300gのうち150g、つまり半分を取るので、糖質も100×150÷300＝50g。水分が多い方は、ごはん360gのうち150gを取るので、糖質は100×150÷360≒41.7gです。減った割合は（50−100×150÷360）÷50×100≒16.7％で、広告見本では「約17％OFF」としました。炊いた分を全部取れば、どちらも糖質100gになります。</p></Note>
-<Note title="実際の広告・製品試験では、何が問題になった？"><p>上のAreti広告には16.8gと41.6gが載っています。この数値だけから割合を計算することはできます。しかし消費者庁は、表示全体から受け取られる「通常の炊飯と同様の炊き上がりで59%カットできる」という効果について、裏付ける資料を合理的な根拠とは認めませんでした。数値の大小と、その数値が主張を裏付けるかは別に確かめます。</p><p><a href={riceAd} target="_blank" rel="noreferrer">実際の広告と注記を見る ↗</a> / <a href={riceOrder} target="_blank" rel="noreferrer">消費者庁の判断を見る ↗</a></p><p>また、国民生活センターの別の製品試験では、水分が増え、100g当たりの糖質の割合は小さくなった一方、同じ米の量から炊いたごはん全体の糖質の総量には大きな差がありませんでした。上の数値例は、この比べ方の違いを理解するためのものです。</p><p>この試験はAreti広告の数値を再現したものとしては扱いません。別の製品試験から「Aretiの59%は水分だけが原因だった」と断定はできません。</p><p><a href={riceTest} target="_blank" rel="noreferrer">国民生活センター：図3・図4を見比べる ↗</a> / <a href="https://www.kokusen.go.jp/news/data/n-20230315_1.html" target="_blank" rel="noreferrer">試験結果の説明 ↗</a></p></Note></article>;}
+const riceStages = ["広告を見る", "同じ米から炊く", "2つの条件で比べる", "比べ方を確かめる"];
+
+export function CarbExplanation() {
+  const [stage, setStage] = useState(0);
+  return <Frame id="carb-comparison-explanation" title="「糖質が少ない」って、何を同じにして比べている？"
+    footer={<StepControls current={stage} labels={riceStages} onChange={setStage} />}>
+    <div className="id-carb-explanation">
+      {stage === 0 && <div className="id-rice-intro"><SampleRiceAd/><div><div className="id-rice-first-impression"><b>この広告を見た人は、こう思うかもしれない</b><p>「すごい！ お米の糖質を減らしてくれる炊飯器なんだ！」</p></div><p><KeyText>その受け取り方でよいかな？ グラフは数値を分かりやすく伝えますが、比較の基準を見落とすと、意味を取り違えてしまいます。炊く前から順に確かめよう。</KeyText></p></div></div>}
+      {stage === 1 && <div className="id-rice-setup"><h4>① まず、同じ150gの米から炊いてみる</h4><p>どちらも<strong>乾いた米150g</strong>からスタート。米に含まれる糖質を<strong>100g</strong>とし、炊飯中に糖質は取り除かれないと仮定します。</p><div className="id-rice-cooking-grid"><CookingFlow moreWater={false}/><CookingFlow moreWater/></div><p>右は水分が多く残ったため、ごはんの重さが増えました。<strong>ごはんの重さが増えることと、糖質が取り除かれることは別です。</strong></p><p className="id-compact">仕組みを考えるための仮定です。米・ごはんの重さや糖質量は、実測値や上の実際の広告の測定値ではありません。</p></div>}
+      {stage === 2 && <div className="id-rice-cases"><section><h4>② A．茶碗に同じ150gずつよそうと？</h4><div className="id-rice-portions"><RicePortion whole={false} moreWater={false}/><RicePortion whole={false} moreWater/></div><p><strong>同じ重さを食べるなら、水分が多い方の糖質は少なくなります。</strong>同じ150gの中で、水分の占める分が増え、米に由来する成分の分が減るからです。</p><p>この仮定では、<strong>「150g当たり約17％OFF」という計算は成り立ちます。</strong>ただし、「元の米から糖質を17％取り除いた」という意味ではありません。</p></section><section><h4>③ B．同じ150gの米から炊いた分を全部食べると？</h4><div className="id-rice-portions"><RicePortion whole moreWater={false}/><RicePortion whole moreWater/></div><p><strong>こちらは、糖質100gで同じです。</strong>ごはんの重さが増えても、米に含まれていた糖質そのものが取り除かれたとは限らないからです。</p><p>茶碗1杯の比較で糖質が少なくても、<strong>炊いた分を全部食べるなら、糖質の総量が減るとは限りません。</strong></p></section></div>}
+      {stage === 3 && <><div className="id-rice-review"><div className="id-rice-takeaway"><h4>伝えたいこと：グラフの外にある「比べ方」を確かめよう</h4><p><KeyText>「100g当たり」「1食当たり」「同じ米から炊いた全量」など、比較の基準をそろえて読みます。棒が短いだけで「含まれていた糖質そのものが減った」と決めつけず、何を同じにして比べた数値かを確認しよう。</KeyText></p></div><section className="id-rice-worked-calculation"><h4>なぜ50gと約41.7gになる？</h4><p>通常は、ごはん300gのうち150g、つまり半分を取るので、糖質も100×150÷300＝50g。水分が多い方は、ごはん360gのうち150gを取るので、糖質は100×150÷360≒41.7gです。減った割合は（50−100×150÷360）÷50×100≒16.7％で、広告見本では「約17％OFF」としました。炊いた分を全部取れば、どちらも糖質100gになります。</p></section></div><Note title="実際の広告・製品試験では、何が問題になった？"><p>上のAreti広告には16.8gと41.6gが載っています。この数値だけから割合を計算することはできます。しかし消費者庁は、表示全体から受け取られる「通常の炊飯と同様の炊き上がりで59%カットできる」という効果について、裏付ける資料を合理的な根拠とは認めませんでした。数値の大小と、その数値が主張を裏付けるかは別に確かめます。</p><p><a href={riceAd} target="_blank" rel="noreferrer">実際の広告と注記を見る ↗</a> / <a href={riceOrder} target="_blank" rel="noreferrer">消費者庁の判断を見る ↗</a></p><p>また、国民生活センターの別の製品試験では、水分が増え、100g当たりの糖質の割合は小さくなった一方、同じ米の量から炊いたごはん全体の糖質の総量には大きな差がありませんでした。上の数値例は、この比べ方の違いを理解するためのものです。</p><p>この試験はAreti広告の数値を再現したものとしては扱いません。別の製品試験から「Aretiの59%は水分だけが原因だった」と断定はできません。</p><p><a href={riceTest} target="_blank" rel="noreferrer">国民生活センター：図3・図4を見比べる ↗</a> / <a href="https://www.kokusen.go.jp/news/data/n-20230315_1.html" target="_blank" rel="noreferrer">試験結果の説明 ↗</a></p></Note></>}
+    </div>
+  </Frame>;
+}

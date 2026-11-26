@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';import {randomUUID} from 'node:crypto';
-const base='http://127.0.0.1:3065/YSFH-Infomatics-2026/api/poll/';const key=(await fs.readFile('tmp/02-04-poll/teacher-url.txt','utf8')).split('#')[1];
+const base='http://127.0.0.1:3065/YSFH-Infomatics-2027/api/poll/';const key=(await fs.readFile('tmp/02-04-poll/teacher-url.txt','utf8')).split('#')[1];
 async function post(route,b){const r=await fetch(base+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const j=await r.json();if(!r.ok)throw new Error(j.error);return j;}
 const [action,id,value]=process.argv.slice(2);
 if(action==='new'){

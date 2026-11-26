@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
-const base='http://127.0.0.1:3065/YSFH-Infomatics-2026/api/poll/';
+const base='http://127.0.0.1:3065/YSFH-Infomatics-2027/api/poll/';
 const key=(await fs.readFile('tmp/02-04-poll/teacher-url.txt','utf8')).split('#')[1];
 async function post(route,b){const r=await fetch(base+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const j=await r.json();assert.equal(r.status,200,JSON.stringify(j));return j;}
 const before=await post('admin',{key}),code=Array.from({length:10000},(_,i)=>String(i).padStart(4,'0')).find(c=>!before.sessions.some(s=>s.active&&s.code===c));

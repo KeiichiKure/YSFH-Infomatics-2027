@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';import fs from 'node:fs/promises';import {randomUUID} from 'node:crypto';
-const base='http://127.0.0.1:3065/YSFH-Infomatics-2026/api/poll/';const key=(await fs.readFile('tmp/02-04-poll/teacher-url.txt','utf8')).split('#')[1];
+const base='http://127.0.0.1:3065/YSFH-Infomatics-2027/api/poll/';const key=(await fs.readFile('tmp/02-04-poll/teacher-url.txt','utf8')).split('#')[1];
 async function post(route,b,fail=false){const r=await fetch(base+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const j=await r.json();if(!fail)assert.equal(r.status,200,JSON.stringify(j));return j;}
 const priorCodes=(await post('admin',{key})).sessions.filter(s=>s.active).map(s=>s.code);const code=Array.from({length:10000},(_,i)=>String(i).padStart(4,'0')).find(c=>!priorCodes.includes(c));
 await post('admin',{key,action:'new',value:code,title:'API自動確認 '+new Date().toISOString()});const db=await post('admin',{key});const s=db.sessions.at(-1);assert.equal(s.code,code);

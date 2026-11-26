@@ -6,17 +6,23 @@ import thinking from '@/public/mascots/student-thinking.png';
 import understood from '@/public/mascots/student-understood.png';
 import celebrating from '@/public/mascots/student-celebrating.png';
 import praise from '@/public/mascots/teacher-praise.png';
+import { SectionTerms } from '@/app/components/revision2027/ImportantTerms';
 import { sections, terms, circled } from './lessonData';
+
+const sectionTerms = terms.map(({ id, term, definition, sectionId, worksheetBlanks }) => ({
+  id, term, definition, sectionId, worksheetBlanks: worksheetBlanks.map(circled),
+}));
 
 export function Guide({ children, mood = 'thinking' }: { children: ReactNode; mood?: 'thinking' | 'understood' | 'celebrating' | 'praise' }) {
   return <aside className="cm-guide"><Image src={{ thinking, understood, celebrating, praise }[mood]} alt={{ thinking: '考える生徒', understood: '気づいた生徒', celebrating: '喜ぶ生徒', praise: '先生' }[mood]} /><div>{children}</div></aside>;
 }
 export function Section({ number, question, children }: { number: number; question: string; children: ReactNode }) {
   const s = sections[number - 1];
-  return <section id={s.id} className="cm-section"><div className="cm-kicker"><span>{number}</span><p>体験して、理由を説明しよう</p><small>教科書 {s.page}</small></div><div className="cm-heading"><h2>{s.title}</h2><span className="cm-print"><small>プリント10</small><b>{s.blanks}</b></span></div><p className="cm-question">{question}</p>{children}<Terms number={number} /></section>;
+  return <section id={s.id} className="cm-section u27-section"><div className="cm-kicker"><span>{number}</span><p>体験して、理由を説明しよう</p><small>教科書 {s.page}</small></div><div className="cm-heading"><h2>{s.title}</h2><span className="cm-print"><small>プリント10</small><b>{s.blanks}</b></span></div><p className="cm-question">{question}</p>{children}<Terms number={number} /></section>;
 }
 export function Terms({ number }: { number: number }) {
-  return <div className="cm-terms"><h3>この体験から、プリントへ</h3><p>丸数字はプリントの空欄番号です。</p><div className="cm-term-grid">{terms.filter(t => t.sectionNumber === number).map(t => <article key={t.id} data-worksheet-blanks={t.worksheetBlanks.join(',')}><div className="cm-term-title"><h4>{t.term}</h4>{t.worksheetBlanks.length > 0 && <span className="cm-blank">プリント {t.worksheetBlanks.map(circled).join('・')}</span>}</div><p>{t.definition}</p><p className="cm-example">体験では：{t.example}</p></article>)}</div></div>;
+  const { id, title, blanks } = sections[number - 1];
+  return <SectionTerms section={{ id, number, label: title, worksheetLabel: `10 · ${blanks}` }} terms={sectionTerms} />;
 }
 export function Frame({ id, title, children, controls }: { id: string; title: string; children: ReactNode; controls?: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
